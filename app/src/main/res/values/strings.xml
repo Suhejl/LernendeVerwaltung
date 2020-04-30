@@ -3,4 +3,11 @@
     <string name="welcome">Willkommen zu NOA</string>
     <string name="see_apprentices">Siehe Lehrnende</string>
     <string name="logo_description">NOA Logo</string>
+    <string name="newUser_cameraLogo">camera logo on newUser Activity</string>
+    <string name="newUser_userLogo">default user logo on newUser Activity, if no picture is defined</string>
+    <string name="prename_input">Vorname:</string>
+    <string name="prename">Vorname</string>
+    <string name="lastname_input">Nachname:</string>
+    <string name="lastname">Vorname</string>
+    <string name="newUser_addUser">Erstelle Nutzer</string>
 </resources>
