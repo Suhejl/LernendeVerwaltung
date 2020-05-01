@@ -8,7 +8,7 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/welcomeToNOA"
+        android:id="@+id/home_welcomeToNOA"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/welcome"
@@ -17,11 +17,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/noaLogo"
+        app:layout_constraintTop_toBottomOf="@+id/home_noaLogo"
         app:layout_constraintVertical_bias="0.251" />
 
     <ImageView
-        android:id="@+id/noaLogo"
+        android:id="@+id/home_noaLogo"
         android:layout_width="328dp"
         android:layout_height="304dp"
         android:layout_marginTop="64dp"
@@ -33,7 +33,7 @@
         app:srcCompat="@drawable/logo_black" />
 
     <Button
-        android:id="@+id/seeApprenticesButton"
+        android:id="@+id/home_seeApprenticesButton"
         android:layout_width="227dp"
         android:layout_height="41dp"
         android:background="@color/see_apprentices_button_background"
@@ -41,7 +41,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/welcomeToNOA"
+        app:layout_constraintTop_toBottomOf="@+id/home_welcomeToNOA"
         app:layout_constraintVertical_bias="0.298" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
