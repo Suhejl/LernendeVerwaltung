@@ -3,18 +3,7 @@
     <string name="welcome">Willkommen zu NOA</string>
     <string name="see_apprentices">Siehe Lehrnende</string>
     <string name="logo_description">NOA Logo</string>
-<<<<<<< Updated upstream
-    <string name="newUser_cameraLogo">camera logo on newUser Activity</string>
-    <string name="newUser_userLogo">default user logo on newUser Activity, if no picture is defined</string>
-    <string name="prename_input">Vorname:</string>
-    <string name="prename">Vorname</string>
-    <string name="lastname_input">Nachname:</string>
-    <string name="lastname">Vorname</string>
-    <string name="newUser_addUser">Erstelle Nutzer</string>
-=======
     <string name="create_apprentice">Erstelle Lernenden</string>
-    <string name="firstname">Vorname</string>
-    <string name="lastname">Nachname</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
