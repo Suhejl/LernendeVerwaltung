@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -44,11 +47,25 @@ public class UserlistActivity extends AppCompatActivity implements ApprenticeAda
         // specify an adapter (see also next example)
         ApprenticeAdapter mAdapter = new ApprenticeAdapter(apprentices, this);
         recyclerView.setAdapter(mAdapter);
+
+
+        Button seeApprenticeButton = findViewById(R.id.userlist_createApprenticeButton);
+        seeApprenticeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openNewUser();
+            }
+        });
     }
 
     @Override
     public void onItemClick(int position) {
         Toast toast = Toast.makeText(this.getApplicationContext(), "clicked on " + apprentices.get(position ), Toast.LENGTH_SHORT );
         toast.show();
+    }
+
+    private void openNewUser() {
+        Intent intend = new Intent(this, NewUserActivity.class);
+        startActivity(intend);
     }
 }

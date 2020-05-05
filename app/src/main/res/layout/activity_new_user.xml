@@ -8,12 +8,12 @@
     tools:context=".NewUserActivity">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/newUser_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:background="@color/green"
@@ -84,7 +84,7 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="32dp"
         android:text="@string/lastname"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -96,7 +96,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="32dp"
         android:text="@string/prename"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
