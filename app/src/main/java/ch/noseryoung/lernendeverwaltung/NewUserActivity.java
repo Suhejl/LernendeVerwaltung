@@ -1,51 +1,40 @@
 package ch.noseryoung.lernendeverwaltung;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
-
-import android.content.Context;
-import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
+
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import ch.noseryoung.lernendeverwaltung.repository.User;
 import ch.noseryoung.lernendeverwaltung.repository.UserDao;
-import android.widget.ImageView;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class NewUserActivity extends AppCompatActivity {
 
     UserDao userDao;
 
-    public static final String EXTRA_PHOTOURL = "ch.noseryoung.lernendeverwaltung.EXTRA_PHOTOURL";
     static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final String PROVIDER_PATH = "ch.noseryoung.lernendeverwaltung.provider";
 
@@ -58,8 +47,15 @@ public class NewUserActivity extends AppCompatActivity {
 
         userDao = MainActivity.getUserDao();
 
+        // Creates new user and closes NewUser Activity to navigate to Userlist
         Button seeApprenticeButton = findViewById(R.id.newUser_createButton);
         seeApprenticeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createNewUser();
+            }
+
+        });
 
         Button photoButton = findViewById(R.id.newUser_photoButton);
         photoButton.setOnClickListener(new View.OnClickListener() {
@@ -69,14 +65,7 @@ public class NewUserActivity extends AppCompatActivity {
             }
         });
 
-        // Creates new user and closes NewUser Activity to navigate to Userlist
-        Button backToUserlistButton = findViewById(R.id.newUser_backButton);
-        backToUserlistButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                createNewUser();
-            }
-        });
+
     }
 
     @Override
@@ -156,12 +145,12 @@ public class NewUserActivity extends AppCompatActivity {
         startActivityForResult(intent, 2);
     }
 
-    private File createImageFile() throws IOException{
+    private File createImageFile() throws IOException {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
-                imageFileName, 		// Dateiname ohne Endung
+                imageFileName,        // Dateiname ohne Endung
                 ".jpg",         // Dateiendung
                 storageDir      // Verzeichnis, in welchem Datei gespeichert werden soll
         );
@@ -176,27 +165,27 @@ public class NewUserActivity extends AppCompatActivity {
         String firstName = firstNameField.getText().toString();
         String lastName = lastNameField.getText().toString();
 
-        if(checkForSize(firstName) && checkForSize(lastName)) {
+        if (checkForSize(firstName) && checkForSize(lastName)) {
             userDao.insertUser(new User(firstName, lastName, "none"));
             finish();
         }
     }
 
-    private boolean checkForSize(String name){
+    private boolean checkForSize(String name) {
 
         Context context = getApplicationContext();
 
-        if(name.trim().length() >= 50){
-            Toast toast = Toast.makeText(context,  name + " is too long. Enter a name below 50 characters", Toast.LENGTH_SHORT);
+        if (name.trim().length() >= 50) {
+            Toast toast = Toast.makeText(context, name + " is too long. Enter a name below 50 characters", Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.TOP, 0, 0);
             toast.show();
             return false;
-        }else if(name.trim().length() == 0){
+        } else if (name.trim().length() == 0) {
             Toast toast = Toast.makeText(context, "Please enter a value into the empty field", Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.TOP, 0, 0);
             toast.show();
             return false;
-        }else{
+        } else {
             return true;
         }
     }

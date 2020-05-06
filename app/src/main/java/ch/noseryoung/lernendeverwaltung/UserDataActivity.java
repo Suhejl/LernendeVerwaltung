@@ -22,4 +22,5 @@ public class UserDataActivity extends AppCompatActivity {
         String[] getFirstAndLastname = intent.getStringArray(UserlistActivity.EXTRA_USER);
         firstnameTextView.setText(getFirstAndLastname[0]);
         lastnameTextView.setText(getFirstAndLastname[1]);
+    }
 }
