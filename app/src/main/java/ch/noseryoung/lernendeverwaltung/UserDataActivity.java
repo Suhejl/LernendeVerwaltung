@@ -33,7 +33,6 @@ public class UserDataActivity extends AppCompatActivity {
     }
 
     private void openUserlist() {
-        Intent intend = new Intent(this, UserlistActivity.class);
-        startActivity(intend);
+        finish();
     }
 }
