@@ -24,11 +24,10 @@ public class ApprenticeAdapter extends RecyclerView.Adapter<ApprenticeAdapter.My
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent,
                                            int viewType) {
-
         // create a new view
         View v = (View) LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_apprentice, parent, false);
-        MyViewHolder vh = new MyViewHolder(v);
+        MyViewHolder vh = new MyViewHolder(v, onItemClickListener);
         return vh;
     }
 
@@ -57,11 +56,12 @@ public class ApprenticeAdapter extends RecyclerView.Adapter<ApprenticeAdapter.My
         public TextView firstname;
         public TextView lastname;
 
-        public MyViewHolder(View v) {
+        public MyViewHolder(View v, OnListItemClickListener onItemclickListener) {
             super(v);
             firstname = v.findViewById(R.id.list_apprentice_firstnameTextView);
             lastname = v.findViewById(R.id.list_apprentice_lastnameTextView);
-
+            this.onItemClickListener = onItemclickListener;
+            v.setOnClickListener(this);
         }
 
         @Override

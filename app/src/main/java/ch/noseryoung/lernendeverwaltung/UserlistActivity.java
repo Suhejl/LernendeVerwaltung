@@ -1,20 +1,22 @@
 package ch.noseryoung.lernendeverwaltung;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 public class UserlistActivity extends AppCompatActivity implements ApprenticeAdapter.OnListItemClickListener{
 
-    private ArrayList apprentices = new ArrayList<String>();
+    public static final String EXTRA_TEXT = "ch.noseryoung.lernendeverwaltung.EXTRA_TEXT";
+
+
+    private ArrayList<String> apprentices = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +27,7 @@ public class UserlistActivity extends AppCompatActivity implements ApprenticeAda
         apprentices.add("Gianluca Asani");
         apprentices.add("Gianluca Umanchandram");
         apprentices.add("Gianluca Umanchandramvvvv");
-        apprentices.add("Umanchandram Umanchandram");
+        apprentices.add("Umanchandramvsdfgvbsvsdfvsdvdsvfsgvfsvsfvfvfdvdfvf Umanchandramvsdfgvbsvsdfvsdvdsvfsgvfsvsfvfvfdvdfvf");
         apprentices.add("Gianluca Umanchandram5");
         apprentices.add("Gianluca 6Umanchandram");
         apprentices.add("Gianluca 7Umanchandram");
@@ -42,13 +44,14 @@ public class UserlistActivity extends AppCompatActivity implements ApprenticeAda
         recyclerView.setNestedScrollingEnabled(false);
         // use a linear layout manager
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+
         recyclerView.setLayoutManager(layoutManager);
 
         // specify an adapter (see also next example)
         ApprenticeAdapter mAdapter = new ApprenticeAdapter(apprentices, this);
         recyclerView.setAdapter(mAdapter);
 
-
+        // Set listener onClick to navigate to new user activity
         Button seeApprenticeButton = findViewById(R.id.userlist_createApprenticeButton);
         seeApprenticeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,8 +63,12 @@ public class UserlistActivity extends AppCompatActivity implements ApprenticeAda
 
     @Override
     public void onItemClick(int position) {
-        Toast toast = Toast.makeText(this.getApplicationContext(), "clicked on " + apprentices.get(position ), Toast.LENGTH_SHORT );
-        toast.show();
+        String[] firstAndLastname = apprentices.get(position).split(" ");
+        Intent intent = new Intent(this, UserDataActivity.class);
+        Bundle extras = new Bundle();
+        extras.putStringArray(EXTRA_TEXT, firstAndLastname);
+        intent.putExtras(extras);
+        startActivity(intent);
     }
 
     private void openNewUser() {

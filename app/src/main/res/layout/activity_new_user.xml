@@ -8,7 +8,7 @@
     tools:context=".NewUserActivity">
 
     <Button
-        android:id="@+id/newUser_button"
+        android:id="@+id/newUser_backButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -21,10 +21,10 @@
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2" />
+        app:layout_constraintTop_toBottomOf="@+id/userdata_lastnameTextView" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/userdata_firstnameTextView"
         android:layout_width="0dp"
         android:layout_height="45dp"
         android:layout_marginStart="32dp"
@@ -42,7 +42,7 @@
         tools:ignore="LabelFor" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/userdata_lastnameTextView"
         android:layout_width="347dp"
         android:layout_height="45dp"
         android:layout_marginStart="32dp"
@@ -89,7 +89,7 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/userdata_firstnameTextView" />
 
     <TextView
         android:id="@+id/textView"
