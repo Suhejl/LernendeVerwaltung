@@ -96,13 +96,13 @@ public class NewUserActivity extends AppCompatActivity {
     }
 
     private void selectImage() {
-        final String takePhotoOption = "Take Photo";
-        final String chooseGalleryOption = "Choose from Gallery";
-        final String cancelOption = "Cancel";
+        final String takePhotoOption = "Foto aufnehmen";
+        final String chooseGalleryOption = "Foto aus Galerie auswählen";
+        final String cancelOption = "Abbrechen";
 
         final String[] options = {takePhotoOption, chooseGalleryOption, cancelOption};
         AlertDialog.Builder builder = new AlertDialog.Builder(NewUserActivity.this);
-        builder.setTitle("Add Photo");
+        builder.setTitle("Foto hinzufügen");
         builder.setItems(options, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -179,12 +179,12 @@ public class NewUserActivity extends AppCompatActivity {
         Context context = getApplicationContext();
 
         if (name.trim().length() >= 50) {
-            Toast toast = Toast.makeText(context, name + " is too long. Enter a name below 50 characters", Toast.LENGTH_SHORT);
+            Toast toast = Toast.makeText(context, name + " ist zu lange. Bitte geben Sie ein Namen unter 50 Zeichen ein.", Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.TOP, 0, 0);
             toast.show();
             return false;
         } else if (name.trim().length() == 0) {
-            Toast toast = Toast.makeText(context, "Please enter a value into the empty field", Toast.LENGTH_SHORT);
+            Toast toast = Toast.makeText(context, "Bitte geben Sie ein Wert im leeren Feld aus", Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.TOP, 0, 0);
             toast.show();
             return false;
@@ -197,7 +197,7 @@ public class NewUserActivity extends AppCompatActivity {
         Context context = getApplicationContext();
 
         if (photoName == null || photoName.trim().length() == 0) {
-            Toast toast = Toast.makeText(context, "No picture selected. Please select a picture for the apprentice", Toast.LENGTH_SHORT);
+            Toast toast = Toast.makeText(context, "Kein Foto ausgewählt. Wählen Sie bitte ein Foto für den Lernenden aus", Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.TOP, 0, 0);
             toast.show();
             return false;

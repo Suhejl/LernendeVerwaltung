@@ -11,6 +11,5 @@
     <string name="newUser_userLogo">default user logo on newUser Activity, if no picture is defined</string>
     <string name="prename">Vorname</string>
     <string name="lastname">Nachname</string>
-    <string name="newUser_addUser">Erstelle Nutzer</string>
     <string name="return_string">Zurück</string>
 </resources>
