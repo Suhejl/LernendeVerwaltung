@@ -27,7 +27,6 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import ch.noseryoung.lernendeverwaltung.repository.User;
 import ch.noseryoung.lernendeverwaltung.repository.UserDao;
@@ -74,7 +73,7 @@ public class NewUserActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        ImageView photo = findViewById(R.id.newUser_userLogo);
+        ImageView photo = findViewById(R.id.newUser_userPhoto);
 
         if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_IMAGE_CAPTURE) {
@@ -152,11 +151,11 @@ public class NewUserActivity extends AppCompatActivity {
         String imageFileName = "JPEG_" + timeStamp + "_LernendeFoto";
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
-                imageFileName,        // Dateiname ohne Endung
-                ".jpg",         // Dateiendung
-                storageDir      // Verzeichnis, in welchem Datei gespeichert werden soll
+                imageFileName,        // Filename without extension
+                ".jpg",         // File extension
+                storageDir      // Directory, where file should be saved
         );
-        currentPhotoName = imageFileName;
+        currentPhotoName = image.getName();
         return image;
     }
 
@@ -167,9 +166,11 @@ public class NewUserActivity extends AppCompatActivity {
         String firstName = firstNameField.getText().toString();
         String lastName = lastNameField.getText().toString();
 
-        if (checkForSize(firstName) && checkForSize(lastName) && checkIsSet(currentPhotoName)) {
+        if (checkForSize(firstName) && checkForSize(lastName)) {
+            if (currentPhotoName == null || currentPhotoName.trim().length() == 0) {
+                currentPhotoName = "none";
+            }
             userDao.insertUser(new User(firstName, lastName, currentPhotoName));
-            List<User> users = userDao.getAll();
             finish();
         }
     }
@@ -191,17 +192,5 @@ public class NewUserActivity extends AppCompatActivity {
         } else {
             return true;
         }
-    }
-
-    private boolean checkIsSet(String photoName){
-        Context context = getApplicationContext();
-
-        if (photoName == null || photoName.trim().length() == 0) {
-            Toast toast = Toast.makeText(context, "Kein Foto ausgewählt. Wählen Sie bitte ein Foto für den Lernenden aus", Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.TOP, 0, 0);
-            toast.show();
-            return false;
-        }
-        return true;
     }
 }

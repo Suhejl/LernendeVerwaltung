@@ -60,7 +60,7 @@
         tools:ignore="LabelFor" />
 
     <ImageView
-        android:id="@+id/newUser_userLogo"
+        android:id="@+id/newUser_userPhoto"
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:layout_marginTop="32dp"
@@ -91,13 +91,13 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newUser_userLogo" />
+        app:layout_constraintTop_toBottomOf="@+id/newUser_userPhoto" />
 
     <Button
         android:id="@+id/newUser_photoButton"
         android:layout_width="56dp"
         android:layout_height="53dp"
         android:background="@drawable/camera_alt"
-        app:layout_constraintBottom_toBottomOf="@+id/newUser_userLogo"
-        app:layout_constraintEnd_toEndOf="@+id/newUser_userLogo" />
+        app:layout_constraintBottom_toBottomOf="@+id/newUser_userPhoto"
+        app:layout_constraintEnd_toEndOf="@+id/newUser_userPhoto" />
 </androidx.constraintlayout.widget.ConstraintLayout>
