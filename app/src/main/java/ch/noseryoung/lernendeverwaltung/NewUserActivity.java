@@ -2,10 +2,13 @@ package ch.noseryoung.lernendeverwaltung;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import ch.noseryoung.lernendeverwaltung.repository.User;
 import ch.noseryoung.lernendeverwaltung.repository.UserDao;
@@ -37,8 +40,28 @@ public class NewUserActivity extends AppCompatActivity {
         String firstName = firstNameField.getText().toString();
         String lastName = lastNameField.getText().toString();
 
-        userDao.insertUser(new User(firstName, lastName, "none"));
+        if(checkForSize(firstName) && checkForSize(lastName)) {
+            userDao.insertUser(new User(firstName, lastName, "none"));
+            finish();
+        }
+    }
 
-        finish();
+    private boolean checkForSize(String name){
+
+        Context context = getApplicationContext();
+
+        if(name.trim().length() >= 50){
+            Toast toast = Toast.makeText(context,  name + " is too long. Enter a name below 50 characters", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.TOP, 0, 0);
+            toast.show();
+            return false;
+        }else if(name.trim().length() == 0){
+            Toast toast = Toast.makeText(context, "Please enter a value into the empty field", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.TOP, 0, 0);
+            toast.show();
+            return false;
+        }else{
+            return true;
+        }
     }
 }
