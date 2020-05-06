@@ -17,7 +17,7 @@ import ch.noseryoung.lernendeverwaltung.repository.UserDao;
 
 public class UserlistActivity extends AppCompatActivity implements ApprenticeAdapter.OnListItemClickListener{
 
-    public static final String EXTRA_USER = "ch.noseryoung.lernendeverwaltung.EXTRA_TEXT";
+    public static final String EXTRA_USER = "ch.noseryoung.lernendeverwaltung.EXTRA_USER";
 
 
     List<User> apprentices = new ArrayList<>();
@@ -69,10 +69,12 @@ public class UserlistActivity extends AppCompatActivity implements ApprenticeAda
 
     @Override
     public void onItemClick(int position) {
-        String[] firstAndLastname = apprentices.get(position).split(" ");
+        String[] firstAndLastname = new String[2];
+        firstAndLastname[0] = apprentices.get(position).getFirstName();
+        firstAndLastname[1] = apprentices.get(position).getLastName();
         Intent intent = new Intent(this, UserDataActivity.class);
         Bundle extras = new Bundle();
-        extras.putStringArray(EXTRA_TEXT, firstAndLastname);
+        extras.putStringArray(EXTRA_USER, firstAndLastname);
         intent.putExtras(extras);
         startActivity(intent);
     }
