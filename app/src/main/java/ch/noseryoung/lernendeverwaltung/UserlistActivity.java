@@ -19,7 +19,6 @@ public class UserlistActivity extends AppCompatActivity implements ApprenticeAda
 
     public static final String EXTRA_USER = "ch.noseryoung.lernendeverwaltung.EXTRA_USER";
 
-
     List<User> apprentices = new ArrayList<>();
     UserDao userDao;
 
@@ -72,7 +71,7 @@ public class UserlistActivity extends AppCompatActivity implements ApprenticeAda
         String[] firstAndLastname = new String[2];
         firstAndLastname[0] = apprentices.get(position).getFirstName();
         firstAndLastname[1] = apprentices.get(position).getLastName();
-        Intent intent = new Intent(this, UserDataActivity.class);
+        Intent intent = new Intent(this, UserdataActivity.class);
         Bundle extras = new Bundle();
         extras.putStringArray(EXTRA_USER, firstAndLastname);
         intent.putExtras(extras);

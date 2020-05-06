@@ -27,6 +27,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import ch.noseryoung.lernendeverwaltung.repository.User;
 import ch.noseryoung.lernendeverwaltung.repository.UserDao;
@@ -39,6 +40,7 @@ public class NewUserActivity extends AppCompatActivity {
     private static final String PROVIDER_PATH = "ch.noseryoung.lernendeverwaltung.provider";
 
     private Uri currentPhotoUri;
+    private String currentPhotoName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,26 +149,27 @@ public class NewUserActivity extends AppCompatActivity {
 
     private File createImageFile() throws IOException {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
+        String imageFileName = "JPEG_" + timeStamp + "_LernendeFoto";
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
                 imageFileName,        // Dateiname ohne Endung
                 ".jpg",         // Dateiendung
                 storageDir      // Verzeichnis, in welchem Datei gespeichert werden soll
         );
-
+        currentPhotoName = imageFileName;
         return image;
     }
 
     private void createNewUser() {
-        EditText firstNameField = findViewById(R.id.userdata_firstnameTextView);
-        EditText lastNameField = findViewById(R.id.userdata_lastnameTextView);
+        EditText firstNameField = findViewById(R.id.newuser_firstnamePlainText);
+        EditText lastNameField = findViewById(R.id.newuser_lastnamePlainText);
 
         String firstName = firstNameField.getText().toString();
         String lastName = lastNameField.getText().toString();
 
-        if (checkForSize(firstName) && checkForSize(lastName)) {
-            userDao.insertUser(new User(firstName, lastName, "none"));
+        if (checkForSize(firstName) && checkForSize(lastName) && checkIsSet(currentPhotoName)) {
+            userDao.insertUser(new User(firstName, lastName, currentPhotoName));
+            List<User> users = userDao.getAll();
             finish();
         }
     }
@@ -188,5 +191,17 @@ public class NewUserActivity extends AppCompatActivity {
         } else {
             return true;
         }
+    }
+
+    private boolean checkIsSet(String photoName){
+        Context context = getApplicationContext();
+
+        if (photoName == null || photoName.trim().length() == 0) {
+            Toast toast = Toast.makeText(context, "No picture selected. Please select a picture for the apprentice", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.TOP, 0, 0);
+            toast.show();
+            return false;
+        }
+        return true;
     }
 }

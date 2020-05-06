@@ -18,7 +18,7 @@
             android:parentActivityName=".UserlistActivity">
 
         </activity>
-        <activity android:name=".UserDataActivity"
+        <activity android:name=".UserdataActivity"
             android:theme="@style/AppTheme"
             android:parentActivityName=".UserlistActivity"></activity>
         <activity

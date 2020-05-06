@@ -8,7 +8,7 @@
     tools:context=".NewUserActivity">
 
     <TextView
-        android:id="@+id/userdata_firstnameTextView"
+        android:id="@+id/newuser_firstnamePlainText"
         android:layout_width="0dp"
         android:layout_height="45dp"
         android:layout_marginStart="32dp"
@@ -27,7 +27,7 @@
         tools:ignore="LabelFor" />
 
     <TextView
-        android:id="@+id/userdata_lastnameTextView"
+        android:id="@+id/newuser_lastnamePlainText"
         android:layout_width="347dp"
         android:layout_height="45dp"
         android:layout_marginStart="32dp"
@@ -65,7 +65,7 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userdata_firstnameTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/newuser_firstnamePlainText" />
 
     <TextView
         android:id="@+id/textView"
