@@ -7,22 +7,6 @@
     android:background="@color/default_background"
     tools:context=".NewUserActivity">
 
-    <Button
-        android:id="@+id/newUser_backButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:background="@color/green"
-        android:text="@string/return_string"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userdata_lastnameTextView" />
-
     <TextView
         android:id="@+id/userdata_firstnameTextView"
         android:layout_width="0dp"
@@ -65,7 +49,7 @@
         android:id="@+id/newUser_userLogo"
         android:layout_width="250dp"
         android:layout_height="250dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="56dp"
         android:contentDescription="@string/newUser_userLogo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

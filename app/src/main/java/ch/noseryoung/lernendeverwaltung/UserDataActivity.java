@@ -19,20 +19,7 @@ public class UserDataActivity extends AppCompatActivity {
         TextView lastnameTextView = findViewById(R.id.userdata_lastnameTextView);
 
         Bundle intent = getIntent().getExtras();
-        String[] getFirstAndLastname = intent.getStringArray(UserlistActivity.EXTRA_TEXT);
+        String[] getFirstAndLastname = intent.getStringArray(UserlistActivity.EXTRA_USER);
         firstnameTextView.setText(getFirstAndLastname[0]);
         lastnameTextView.setText(getFirstAndLastname[1]);
-
-        Button backButton = findViewById(R.id.newUser_backButton);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openUserlist();
-            }
-        });
-    }
-
-    private void openUserlist() {
-        finish();
-    }
 }

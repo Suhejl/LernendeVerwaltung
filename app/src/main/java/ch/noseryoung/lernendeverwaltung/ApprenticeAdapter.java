@@ -9,13 +9,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import ch.noseryoung.lernendeverwaltung.repository.User;
 
 public class ApprenticeAdapter extends RecyclerView.Adapter<ApprenticeAdapter.MyViewHolder> {
-    private ArrayList<String> apprenticeDataset;
+    private List<User> apprenticeDataset;
     OnListItemClickListener onItemClickListener;
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public ApprenticeAdapter(ArrayList<String> apprenticeDataset, OnListItemClickListener onItemClickListener ) {
+    public ApprenticeAdapter(List<User> apprenticeDataset, OnListItemClickListener onItemClickListener ) {
         this.apprenticeDataset = apprenticeDataset;
         this.onItemClickListener = onItemClickListener;
     }
@@ -35,9 +38,10 @@ public class ApprenticeAdapter extends RecyclerView.Adapter<ApprenticeAdapter.My
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         // - get element from apprentice dataset at this position
         // - replace the contents of the view with that element
-        String[] apprenticeDatas = apprenticeDataset.get(position).split(" ");
-        holder.firstname.setText(apprenticeDatas[0]);
-        holder.lastname.setText(apprenticeDatas[1]);
+        String firstName = apprenticeDataset.get(position).getFirstName();
+        String lastName = apprenticeDataset.get(position).getLastName();
+        holder.firstname.setText(firstName);
+        holder.lastname.setText(lastName);
     }
 
     // Return the size of the apprentice dataset (invoked by the layout manager)

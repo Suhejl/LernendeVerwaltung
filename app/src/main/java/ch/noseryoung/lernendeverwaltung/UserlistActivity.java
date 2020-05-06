@@ -10,13 +10,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import ch.noseryoung.lernendeverwaltung.repository.User;
+import ch.noseryoung.lernendeverwaltung.repository.UserDao;
 
 public class UserlistActivity extends AppCompatActivity implements ApprenticeAdapter.OnListItemClickListener{
 
-    public static final String EXTRA_TEXT = "ch.noseryoung.lernendeverwaltung.EXTRA_TEXT";
+    public static final String EXTRA_USER = "ch.noseryoung.lernendeverwaltung.EXTRA_USER";
 
 
-    private ArrayList<String> apprentices = new ArrayList<>();
+    List<User> apprentices = new ArrayList<>();
+    UserDao userDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,34 +29,11 @@ public class UserlistActivity extends AppCompatActivity implements ApprenticeAda
         setContentView(R.layout.activity_userlist);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        apprentices.add("Gianluca Asani");
-        apprentices.add("Gianluca Umanchandram");
-        apprentices.add("Gianluca Umanchandramvvvv");
-        apprentices.add("Umanchandramvsdfgvbsvsdfvsdvdsvfsgvfsvsfvfvfdvdfvf Umanchandramvsdfgvbsvsdfvsdvdsvfsgvfsvsfvfvfdvdfvf");
-        apprentices.add("Gianluca Umanchandram5");
-        apprentices.add("Gianluca 6Umanchandram");
-        apprentices.add("Gianluca 7Umanchandram");
-        apprentices.add("Gianluca 8Umanchandram");
-        apprentices.add("Gianluca 9Umanchandram");
-        apprentices.add("Gianluca 10Umanchandram");
-        apprentices.add("Gianluca 11Umanchandram");
-        apprentices.add("Gianluca 12Umanchandram");
+        //gets dao from MainActivity
+        userDao = MainActivity.getUserDao();
 
-        RecyclerView recyclerView = findViewById(R.id.userlist_apprenticesList);
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setNestedScrollingEnabled(false);
-        // use a linear layout manager
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        loadList();
 
-        recyclerView.setLayoutManager(layoutManager);
-
-        // specify an adapter (see also next example)
-        ApprenticeAdapter mAdapter = new ApprenticeAdapter(apprentices, this);
-        recyclerView.setAdapter(mAdapter);
-
-        // Set listener onClick to navigate to new user activity
         Button seeApprenticeButton = findViewById(R.id.userlist_createApprenticeButton);
         seeApprenticeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,12 +43,38 @@ public class UserlistActivity extends AppCompatActivity implements ApprenticeAda
         });
     }
 
+    private void loadList(){
+        //loads list from database
+        apprentices = userDao.getAll();
+
+        RecyclerView recyclerView = findViewById(R.id.userlist_apprenticesList);
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setNestedScrollingEnabled(false);
+        // use a linear layout manager
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        // specify an adapter (see also next example)
+        ApprenticeAdapter mAdapter = new ApprenticeAdapter(apprentices, this);
+        recyclerView.setAdapter(mAdapter);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadList();
+    }
+
     @Override
     public void onItemClick(int position) {
-        String[] firstAndLastname = apprentices.get(position).split(" ");
+        String[] firstAndLastname = new String[2];
+        firstAndLastname[0] = apprentices.get(position).getFirstName();
+        firstAndLastname[1] = apprentices.get(position).getLastName();
         Intent intent = new Intent(this, UserDataActivity.class);
         Bundle extras = new Bundle();
-        extras.putStringArray(EXTRA_TEXT, firstAndLastname);
+        extras.putStringArray(EXTRA_USER, firstAndLastname);
         intent.putExtras(extras);
         startActivity(intent);
     }
