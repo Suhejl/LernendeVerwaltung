@@ -3,7 +3,9 @@ package ch.noseryoung.lernendeverwaltung.activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +14,7 @@ import ch.noseryoung.lernendeverwaltung.R;
 import ch.noseryoung.lernendeverwaltung.repository.User;
 import ch.noseryoung.lernendeverwaltung.repository.UserDao;
 import ch.noseryoung.lernendeverwaltung.manager.UserImageViewManager;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UserdataActivity extends AppCompatActivity {
 
@@ -29,7 +32,7 @@ public class UserdataActivity extends AppCompatActivity {
 
         TextView firstnameTextView = findViewById(R.id.userdata_firstnamePlainText);
         TextView lastnameTextView = findViewById(R.id.userdata_lastnamePlainText);
-
+        final CircleImageView userPhoto = findViewById(R.id.userdata_userPhoto);
         try {
             Bundle bundle = getIntent().getExtras();
             int userId = bundle.getInt(UserlistActivity.EXTRA_USER_ID);
@@ -40,7 +43,7 @@ public class UserdataActivity extends AppCompatActivity {
             lastnameTextView.setText(user.getLastName());
 
             Bitmap userPhotoBitmap = userImageViewManager.getUserPhotoAsBitmap(user.getPicture());
-            ImageView userPhoto = findViewById(R.id.userdata_userPhoto);
+
 
             userPhoto.setImageBitmap(userPhotoBitmap);
         } catch (NullPointerException nullex) {

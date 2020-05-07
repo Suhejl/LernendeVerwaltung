@@ -45,16 +45,17 @@
         app:layout_constraintTop_toBottomOf="@+id/userdata_lastnameTextView"
         tools:ignore="LabelFor" />
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/userdata_userPhoto"
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:layout_marginTop="56dp"
         android:contentDescription="@string/newUser_userLogo"
+        android:src="@drawable/account_circle"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/account_circle" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/userdata_lastnameTextView"
