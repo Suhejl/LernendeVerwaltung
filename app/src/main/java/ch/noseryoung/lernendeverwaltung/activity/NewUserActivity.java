@@ -31,6 +31,7 @@ import java.util.Date;
 import ch.noseryoung.lernendeverwaltung.R;
 import ch.noseryoung.lernendeverwaltung.repository.User;
 import ch.noseryoung.lernendeverwaltung.repository.UserDao;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class NewUserActivity extends AppCompatActivity {
 
@@ -38,6 +39,7 @@ public class NewUserActivity extends AppCompatActivity {
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final String PROVIDER_PATH = "ch.noseryoung.lernendeverwaltung.provider";
+    private static final String TAG = "NewUserActivity";
 
     private Uri currentPhotoUri;
     private String currentPhotoName;
@@ -67,7 +69,18 @@ public class NewUserActivity extends AppCompatActivity {
             }
         });
 
+        CircleImageView apprenticePhoto = findViewById(R.id.newUser_userPhoto);
 
+        apprenticePhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (currentPhotoUri == null) {
+                    selectImage();
+                } else {
+                    openFullscreenApprenticePhoto();
+                }
+            }
+        });
     }
 
     @Override
@@ -88,7 +101,7 @@ public class NewUserActivity extends AppCompatActivity {
                 String picturePath = c.getString(columnIndex);
                 c.close();
                 Bitmap thumbnail = BitmapFactory.decodeFile(picturePath);
-                Log.w("path from gallery..**..", picturePath);
+                Log.w(TAG, picturePath);
                 photo.setImageBitmap(thumbnail);
 
             }
@@ -127,7 +140,7 @@ public class NewUserActivity extends AppCompatActivity {
             try {
                 imageFile = createImageFile();
             } catch (IOException ex) {
-                Log.e("NewUser", "Error occurred while creating the File");
+                Log.e(TAG, "Error occurred while creating the File");
             }
 
             if (imageFile != null) {
@@ -173,6 +186,14 @@ public class NewUserActivity extends AppCompatActivity {
             }
             userDao.insertUser(new User(firstName, lastName, currentPhotoName));
             finish();
+        }
+    }
+
+    private void openFullscreenApprenticePhoto() {
+        if (currentPhotoUri != null) {
+            Intent fullscreenIntent = new Intent(this, FullScreenImageActivity.class);
+            fullscreenIntent.setData(currentPhotoUri);
+            startActivity(fullscreenIntent);
         }
     }
 
