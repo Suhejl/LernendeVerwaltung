@@ -6,10 +6,9 @@
     <string name="create_apprentice">Erstelle Lernenden</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="newUser_cameraLogo">camera logo on newUser Activity</string>
     <string name="newUser_userLogo">default user logo on newUser Activity, if no picture is defined</string>
     <string name="prename">Vorname</string>
     <string name="lastname">Nachname</string>
-    <string name="return_string">Zurück</string>
+    <string name="userlistPhoto">Photo of the user in list</string>
 </resources>

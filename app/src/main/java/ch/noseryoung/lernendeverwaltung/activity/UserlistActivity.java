@@ -1,4 +1,4 @@
-package ch.noseryoung.lernendeverwaltung;
+package ch.noseryoung.lernendeverwaltung.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,15 +12,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import ch.noseryoung.lernendeverwaltung.adapter.ApprenticeAdapter;
+import ch.noseryoung.lernendeverwaltung.R;
+import ch.noseryoung.lernendeverwaltung.manager.UserImageViewManager;
 import ch.noseryoung.lernendeverwaltung.repository.User;
 import ch.noseryoung.lernendeverwaltung.repository.UserDao;
 
-public class UserlistActivity extends AppCompatActivity implements ApprenticeAdapter.OnListItemClickListener{
+public class UserlistActivity extends AppCompatActivity implements ApprenticeAdapter.OnListItemClickListener {
 
-    public static final String EXTRA_USER_ID = "ch.noseryoung.lernendeverwaltung.EXTRA_USER_ID";
+    public static final String EXTRA_USER_ID = "ch.noseryoung.lernendeverwaltung.activity.EXTRA_USER_ID";
 
-    List<User> apprentices = new ArrayList<>();
-    UserDao userDao;
+    private List<User> apprentices = new ArrayList<>();
+    private UserDao userDao;
+    private UserImageViewManager userImageViewManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +34,7 @@ public class UserlistActivity extends AppCompatActivity implements ApprenticeAda
 
         //gets dao from MainActivity
         userDao = MainActivity.getUserDao();
+        userImageViewManager = new UserImageViewManager(this);
 
         loadList();
 
@@ -56,7 +61,7 @@ public class UserlistActivity extends AppCompatActivity implements ApprenticeAda
         recyclerView.setLayoutManager(layoutManager);
 
         // specify an adapter (see also next example)
-        ApprenticeAdapter mAdapter = new ApprenticeAdapter(apprentices, this);
+        ApprenticeAdapter mAdapter = new ApprenticeAdapter(apprentices, this, userImageViewManager);
         recyclerView.setAdapter(mAdapter);
     }
 

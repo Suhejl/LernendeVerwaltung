@@ -1,4 +1,4 @@
-package ch.noseryoung.lernendeverwaltung;
+package ch.noseryoung.lernendeverwaltung.activity;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -28,14 +28,15 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import ch.noseryoung.lernendeverwaltung.R;
 import ch.noseryoung.lernendeverwaltung.repository.User;
 import ch.noseryoung.lernendeverwaltung.repository.UserDao;
 
 public class NewUserActivity extends AppCompatActivity {
 
-    UserDao userDao;
+    private UserDao userDao;
 
-    static final int REQUEST_IMAGE_CAPTURE = 1;
+    private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final String PROVIDER_PATH = "ch.noseryoung.lernendeverwaltung.provider";
 
     private Uri currentPhotoUri;
@@ -160,8 +161,8 @@ public class NewUserActivity extends AppCompatActivity {
     }
 
     private void createNewUser() {
-        EditText firstNameField = findViewById(R.id.newuser_firstnamePlainText);
-        EditText lastNameField = findViewById(R.id.newuser_lastnamePlainText);
+        EditText firstNameField = findViewById(R.id.newUser_firstnamePlainText);
+        EditText lastNameField = findViewById(R.id.newUser_lastnamePlainText);
 
         String firstName = firstNameField.getText().toString();
         String lastName = lastNameField.getText().toString();

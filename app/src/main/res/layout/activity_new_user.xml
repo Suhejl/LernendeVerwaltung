@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/default_background"
-    tools:context=".NewUserActivity">
+    tools:context=".activity.NewUserActivity">
 
     <Button
         android:id="@+id/newUser_createButton"
@@ -21,10 +21,10 @@
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newuser_lastnamePlainText" />
+        app:layout_constraintTop_toBottomOf="@+id/newUser_lastnamePlainText" />
 
     <EditText
-        android:id="@+id/newuser_firstnamePlainText"
+        android:id="@+id/newUser_firstnamePlainText"
         android:layout_width="0dp"
         android:layout_height="45dp"
         android:layout_marginStart="32dp"
@@ -38,11 +38,11 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/newUser_firstnameTextView"
         tools:ignore="LabelFor" />
 
     <EditText
-        android:id="@+id/newuser_lastnamePlainText"
+        android:id="@+id/newUser_lastnamePlainText"
         android:layout_width="347dp"
         android:layout_height="45dp"
         android:layout_marginStart="32dp"
@@ -56,7 +56,7 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/newUser_lastnameTextView"
         tools:ignore="LabelFor" />
 
     <ImageView
@@ -71,7 +71,7 @@
         app:srcCompat="@drawable/account_circle" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/newUser_lastnameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -79,10 +79,10 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newuser_firstnamePlainText" />
+        app:layout_constraintTop_toBottomOf="@+id/newUser_firstnamePlainText" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/newUser_firstnameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
@@ -98,6 +98,7 @@
         android:layout_width="56dp"
         android:layout_height="53dp"
         android:background="@drawable/camera_alt"
+        android:contentDescription="@string/newUser_cameraLogo"
         app:layout_constraintBottom_toBottomOf="@+id/newUser_userPhoto"
         app:layout_constraintEnd_toEndOf="@+id/newUser_userPhoto" />
 </androidx.constraintlayout.widget.ConstraintLayout>

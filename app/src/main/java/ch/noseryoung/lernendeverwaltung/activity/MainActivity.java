@@ -1,4 +1,4 @@
-package ch.noseryoung.lernendeverwaltung;
+package ch.noseryoung.lernendeverwaltung.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import ch.noseryoung.lernendeverwaltung.R;
 import ch.noseryoung.lernendeverwaltung.repository.UserDao;
 import ch.noseryoung.lernendeverwaltung.repository.UserDatabase;
 
