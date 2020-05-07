@@ -11,4 +11,9 @@
     <string name="prename">Vorname</string>
     <string name="lastname">Nachname</string>
     <string name="userlistPhoto">Photo of the user in list</string>
+
+    <string name="title_activity_fullscreen_image">FullscreenImageActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="fullscreen_apprentice_photo_description">Apprentice Photo in full screen</string>
 </resources>
