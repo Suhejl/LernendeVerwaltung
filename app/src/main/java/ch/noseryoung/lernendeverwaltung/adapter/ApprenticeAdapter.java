@@ -1,11 +1,9 @@
 package ch.noseryoung.lernendeverwaltung.adapter;
 
 import android.graphics.Bitmap;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,21 +13,24 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import ch.noseryoung.lernendeverwaltung.R;
-import ch.noseryoung.lernendeverwaltung.manager.UserImageViewManager;
-import ch.noseryoung.lernendeverwaltung.repository.User;
+import ch.noseryoung.lernendeverwaltung.manager.ApprenticeImageViewManager;
+import ch.noseryoung.lernendeverwaltung.repository.Apprentice;
 
+/**
+ *
+ */
 public class ApprenticeAdapter extends RecyclerView.Adapter<ApprenticeAdapter.ApprenticeViewHolder> {
     private static final String TAG = "ApprenticeAdapter";
 
-    private List<User> apprenticeDataset;
-    private UserImageViewManager userImageViewManager;
+    private List<Apprentice> apprenticeDataset;
+    private ApprenticeImageViewManager apprenticeImageViewManager;
     private OnListItemClickListener onItemClickListener;
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public ApprenticeAdapter(List<User> apprenticeDataset, OnListItemClickListener onItemClickListener, UserImageViewManager userImageViewManager) {
+    public ApprenticeAdapter(List<Apprentice> apprenticeDataset, OnListItemClickListener onItemClickListener, ApprenticeImageViewManager apprenticeImageViewManager) {
         this.apprenticeDataset = apprenticeDataset;
         this.onItemClickListener = onItemClickListener;
-        this.userImageViewManager = userImageViewManager;
+        this.apprenticeImageViewManager = apprenticeImageViewManager;
     }
 
     // Create new views (invoked by the layout manager)
@@ -54,7 +55,7 @@ public class ApprenticeAdapter extends RecyclerView.Adapter<ApprenticeAdapter.Ap
         String firstName = apprenticeDataset.get(position).getFirstName();
         String lastName = apprenticeDataset.get(position).getLastName();
         String userPhotoName = apprenticeDataset.get(position).getPicture();
-        Bitmap userPhoto = userImageViewManager.getUserPhotoAsBitmap(userPhotoName);
+        Bitmap userPhoto = apprenticeImageViewManager.getApprenticePhotoAsBitmap(userPhotoName);
 
         holder.firstname.setText(firstName);
         holder.lastname.setText(lastName);

@@ -14,7 +14,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
 
 import java.io.File;
@@ -23,38 +22,50 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import ch.noseryoung.lernendeverwaltung.R;
-import ch.noseryoung.lernendeverwaltung.repository.User;
-import ch.noseryoung.lernendeverwaltung.repository.UserDao;
+import ch.noseryoung.lernendeverwaltung.repository.Apprentice;
+import ch.noseryoung.lernendeverwaltung.repository.ApprenticeDao;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class NewUserActivity extends BaseMenuActivity {
+/**
+ * Class that represents the view where the form is to create a new Apprentice.
+ */
+public class NewApprenticeActivity extends BaseMenuActivity {
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
+
+    // Path for the created Class that extends FileProvider
     private static final String PROVIDER_PATH = "ch.noseryoung.lernendeverwaltung.provider";
-    private static final String TAG = "NewUserActivity";
+    private static final String TAG = "NewApprenticeActivity";
 
     private Uri currentPhotoUri;
     private String currentPhotoName;
-    private UserDao userDao;
 
+    // Database connection
+    private ApprenticeDao apprenticeDao;
+
+    /**
+     * Creates the view and displays it to the apprentice.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_user);
+        setContentView(R.layout.activity_new_apprentice);
 
-        userDao = MainActivity.getUserDao();
+        apprenticeDao = MainActivity.getApprenticeDao();
 
-        // Creates new user and closes NewUser Activity to navigate to Userlist
-        Button seeApprenticeButton = findViewById(R.id.newUser_createButton);
-        seeApprenticeButton.setOnClickListener(new View.OnClickListener() {
+        // OnClickListener that creates new apprentice and closes NewApprentice Activity to navigate to Apprenticelist
+        Button seeApprenticesButton = findViewById(R.id.newApprentice_createButton);
+        seeApprenticesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createNewUser();
+                createNewApprentice();
             }
 
         });
 
-        Button photoButton = findViewById(R.id.newUser_photoButton);
+        // OnClickListener that opens camera
+        Button photoButton = findViewById(R.id.newApprentice_photoButton);
         photoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,8 +73,8 @@ public class NewUserActivity extends BaseMenuActivity {
             }
         });
 
-        CircleImageView apprenticePhoto = findViewById(R.id.newUser_userPhoto);
-
+        // OnClickListener if picture was taken, the picture opens up in fullscreen, else the camera is opened
+        CircleImageView apprenticePhoto = findViewById(R.id.newApprentice_apprenticePhoto);
         apprenticePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,28 +87,41 @@ public class NewUserActivity extends BaseMenuActivity {
         });
     }
 
+    /**
+     * If an implicit intent is called, this overriden method gets the request code of the intent.
+     * With the result code you can check if the picture was taken and confirmed
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        ImageView photo = findViewById(R.id.newUser_userPhoto);
+        ImageView photo = findViewById(R.id.newApprentice_apprenticePhoto);
 
         if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_IMAGE_CAPTURE) {
                 photo.setImageURI(currentPhotoUri);
             }
         } else {
+            // When the picture hasn't been taken, the apprentice has no picture
             currentPhotoUri = null;
+            currentPhotoName = null;
         }
     }
 
+    /**
+     * Opens an implicit intent to the camera.
+     * First an image file is created and the FileProvider gets the URI of the image file.
+     */
     private void openCamera() {
-
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
 
             File imageFile = null;
             try {
+                // Image file is created with the createImageFile() method
                 imageFile = createImageFile();
             } catch (IOException ex) {
                 Log.e(TAG, "Error occurred while creating the File");
@@ -115,6 +139,13 @@ public class NewUserActivity extends BaseMenuActivity {
         }
     }
 
+    /**
+     * Creates an image file in the directory pictures of the installed application.
+     * Name of created image is named by a time stamp.
+     * To create the file, the FileProvider is used for secure file sharing
+     * @return
+     * @throws IOException
+     */
     private File createImageFile() throws IOException {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_LernendeFoto_";
@@ -128,9 +159,12 @@ public class NewUserActivity extends BaseMenuActivity {
         return image;
     }
 
-    private void createNewUser() {
-        EditText firstNameField = findViewById(R.id.newUser_firstnamePlainText);
-        EditText lastNameField = findViewById(R.id.newUser_lastnamePlainText);
+    /**
+     * Creates a new apprentice after validating the form and destroys this activity
+     */
+    private void createNewApprentice() {
+        EditText firstNameField = findViewById(R.id.newApprentice_firstnamePlainText);
+        EditText lastNameField = findViewById(R.id.newApprentice_lastnamePlainText);
 
         String firstName = firstNameField.getText().toString();
         String lastName = lastNameField.getText().toString();
@@ -139,11 +173,15 @@ public class NewUserActivity extends BaseMenuActivity {
             if (currentPhotoName == null || currentPhotoName.trim().length() == 0) {
                 currentPhotoName = "none";
             }
-            userDao.insertUser(new User(firstName, lastName, currentPhotoName));
+            apprenticeDao.insertApprentice(new Apprentice(firstName, lastName, currentPhotoName));
             finish();
         }
     }
 
+    /**
+     * Gets executed when profile picture of apprentice is clicked.
+     * Opens FullScreenImageActivity
+     */
     private void openFullscreenApprenticePhoto() {
         if (currentPhotoUri != null) {
             Intent fullscreenIntent = new Intent(this, FullScreenImageActivity.class);
@@ -152,8 +190,13 @@ public class NewUserActivity extends BaseMenuActivity {
         }
     }
 
+    /**
+     * Checks the entries in the form. The firstname and the lastname have to be between 1 and 49 characters to return true.
+     * @param name
+     * @return
+     */
     private boolean checkForSize(String name) {
-
+        // Represents the current instance of this activity and is used to make Toasts
         Context context = getApplicationContext();
 
         if (name.trim().length() >= 50) {

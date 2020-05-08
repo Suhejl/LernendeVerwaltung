@@ -12,31 +12,47 @@ import java.io.File;
 
 import ch.noseryoung.lernendeverwaltung.R;
 
-public class UserImageViewManager {
+/**
+ * Manager class that has the logic for the images in the filesystem
+ */
+public class ApprenticeImageViewManager {
 
+    // Is needed to access the picture directory
     private Context context;
-    private static final String TAG = "UserImageViewManager";
+    private static final String TAG = "ApprenticeImageManager";
 
-    public UserImageViewManager(Context context) {
+    public ApprenticeImageViewManager(Context context) {
         this.context = context;
     }
 
-    public Bitmap getUserPhotoAsBitmap(String photoName) {
-        File userPhotoFile = getUserPhotoFileFromGallery(photoName);
+    /**
+     * gets the apprentice image path and returns it as Bitmap
+     * @param photoName
+     * @return
+     */
+    public Bitmap getApprenticePhotoAsBitmap(String photoName) {
+        File apprenticePhotoFile = getApprenticePhotoFileFromGallery(photoName);
 
-        if (userPhotoFile == null) {
+        if (apprenticePhotoFile == null) {
             Drawable drawable = context.getResources().getDrawable(R.drawable.account_circle);
             return ((BitmapDrawable) drawable).getBitmap();
         }
 
-        String userPhotoPath = userPhotoFile.getPath();
+        String apprenticePhotoPath = apprenticePhotoFile.getPath();
 
         BitmapFactory.Options options = new BitmapFactory.Options();
+
+        // Image gets smaller to save space
         options.inSampleSize = 8;
-        return BitmapFactory.decodeFile(userPhotoPath, options);
+        return BitmapFactory.decodeFile(apprenticePhotoPath, options);
     }
 
-    private File getUserPhotoFileFromGallery(String photoName) {
+    /**
+     * Reads the pictures directory and gets the image file that is equal to the photo name given
+     * @param photoName
+     * @return
+     */
+    private File getApprenticePhotoFileFromGallery(String photoName) {
         File storageDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
 
         try {
@@ -46,7 +62,7 @@ public class UserImageViewManager {
                 }
             }
         } catch (NullPointerException nullPointerEx) {
-            Log.w(TAG, nullPointerEx.getMessage());
+            Log.w(TAG, nullPointerEx.getMessage() + " --- No files found");
         }
         return null;
     }
