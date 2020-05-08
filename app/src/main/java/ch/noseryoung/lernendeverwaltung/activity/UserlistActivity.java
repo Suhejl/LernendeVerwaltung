@@ -17,7 +17,7 @@ import ch.noseryoung.lernendeverwaltung.manager.UserImageViewManager;
 import ch.noseryoung.lernendeverwaltung.repository.User;
 import ch.noseryoung.lernendeverwaltung.repository.UserDao;
 
-public class UserlistMenuActivity extends BaseMenuActivity implements ApprenticeAdapter.OnListItemClickListener {
+public class UserlistActivity extends BaseMenuActivity implements ApprenticeAdapter.OnListItemClickListener {
 
     public static final String EXTRA_USER_ID = "ch.noseryoung.lernendeverwaltung.activity.EXTRA_USER_ID";
 
@@ -78,13 +78,13 @@ public class UserlistMenuActivity extends BaseMenuActivity implements Apprentice
     @Override
     public void onItemClick(int position) {
         User user = apprentices.get(position);
-        Intent intent = new Intent(this, UserdataMenuActivity.class);
+        Intent intent = new Intent(this, UserdataActivity.class);
         intent.putExtra(EXTRA_USER_ID, user.getId());
         startActivity(intent);
     }
     //Opens Activity with form for creating a new user
     private void openNewUser() {
-        Intent intend = new Intent(this, NewUserMenuActivity.class);
+        Intent intend = new Intent(this, NewUserActivity.class);
         startActivity(intend);
     }
 }

@@ -34,7 +34,7 @@ import ch.noseryoung.lernendeverwaltung.repository.User;
 import ch.noseryoung.lernendeverwaltung.repository.UserDao;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class NewUserMenuActivity extends BaseMenuActivity {
+public class NewUserActivity extends BaseMenuActivity {
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final String PROVIDER_PATH = "ch.noseryoung.lernendeverwaltung.provider";

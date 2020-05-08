@@ -13,7 +13,7 @@ import ch.noseryoung.lernendeverwaltung.repository.User;
 import ch.noseryoung.lernendeverwaltung.repository.UserDao;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class UserdataMenuActivity extends BaseMenuActivity {
+public class UserdataActivity extends BaseMenuActivity {
 
     private static final String TAG = "UserdataActivity";
 
@@ -38,7 +38,7 @@ public class UserdataMenuActivity extends BaseMenuActivity {
         try {
             //fetch user by given userid in bundle
             Bundle bundle = getIntent().getExtras();
-            int apprenticeID = bundle.getInt(UserlistMenuActivity.EXTRA_USER_ID);
+            int apprenticeID = bundle.getInt(UserlistActivity.EXTRA_USER_ID);
             selectedApprentice = userDao.getById(apprenticeID);
 
 
@@ -55,8 +55,6 @@ public class UserdataMenuActivity extends BaseMenuActivity {
                         openFullscreenApprenticePhoto();
                     }
                 });
-            }
-
         } catch (NullPointerException nullex) {
             Log.w(TAG, nullex.getMessage());
         }
@@ -64,7 +62,7 @@ public class UserdataMenuActivity extends BaseMenuActivity {
     //opens new activity, that shows the profile picture in fullscreen
     private void openFullscreenApprenticePhoto() {
         Intent fullscreenIntent = new Intent(this, FullScreenImageActivity.class);
-        fullscreenIntent.putExtra(UserlistMenuActivity.EXTRA_USER_ID, selectedApprentice.getId());
+        fullscreenIntent.putExtra(UserlistActivity.EXTRA_USER_ID, selectedApprentice.getId());
         startActivity(fullscreenIntent);
     }
 }

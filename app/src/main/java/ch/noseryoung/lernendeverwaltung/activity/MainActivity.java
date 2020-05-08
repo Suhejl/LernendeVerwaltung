@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openUserlist() {
-        Intent intend = new Intent(this, UserlistMenuActivity.class);
+        Intent intend = new Intent(this, UserlistActivity.class);
         startActivity(intend);
     }
 }
