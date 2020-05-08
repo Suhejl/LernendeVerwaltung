@@ -34,8 +34,8 @@ public class UserdataActivity extends AppCompatActivity {
         userImageViewManager = new UserImageViewManager(this);
 
 
-        TextView firstnameTextView = findViewById(R.id.userdata_firstnamePlainText);
-        TextView lastnameTextView = findViewById(R.id.userdata_lastnamePlainText);
+        TextView firstnameTextView = findViewById(R.id.userdata_firstname);
+        TextView lastnameTextView = findViewById(R.id.userdata_lastname);
         final CircleImageView userPhoto = findViewById(R.id.userdata_userPhoto);
         try {
             Bundle bundle = getIntent().getExtras();
