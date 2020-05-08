@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -65,11 +68,30 @@ public class UserdataActivity extends AppCompatActivity {
         }
     }
 
-
     private void openFullscreenApprenticePhoto() {
         Intent fullscreenIntent = new Intent(this, FullScreenImageActivity.class);
         fullscreenIntent.putExtra(UserlistActivity.EXTRA_USER_ID, selectedApprentice.getId());
         startActivity(fullscreenIntent);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.main_menu,menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+
+        if(item.getItemId() == R.id.aboutus) {
+            Intent intend = new Intent(this, AboutUsActivity.class);
+            startActivity(intend);
+            return true;
+        }
+        return false;
+    }
 }

@@ -4,9 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
@@ -35,15 +35,15 @@ public class FullScreenImageActivity extends AppCompatActivity {
 
             if (callingActivityIntent.hasExtra(UserlistActivity.EXTRA_USER_ID)) {
                 int apprenticeID = callingActivityIntent.getIntExtra(UserlistActivity.EXTRA_USER_ID, 0);
-                setFullscreenImageByBitmap(apprenticeID);
-            } else {
+                setFullscreenImageById(apprenticeID);
+            } else{
                 Uri apprenticePhotoUri = callingActivityIntent.getData();
                 setFullscreenImageByUri(apprenticePhotoUri);
             }
         }
     }
 
-    private void setFullscreenImageByBitmap(int apprenticeID){
+    private void setFullscreenImageById(int apprenticeID){
         ImageView fullScreenImageView = findViewById(R.id.fullScreenImage_ApprenticePhoto);
         User apprentice = userDao.getById(apprenticeID);
         fullScreenImageView.getDrawable().toString();
