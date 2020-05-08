@@ -26,7 +26,9 @@ import androidx.core.content.FileProvider;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import ch.noseryoung.lernendeverwaltung.R;
 import ch.noseryoung.lernendeverwaltung.repository.User;
@@ -38,11 +40,21 @@ public class NewUserActivity extends AppCompatActivity {
     private UserDao userDao;
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
+    private static final int PICK_IMAGE = 2;
     private static final String PROVIDER_PATH = "ch.noseryoung.lernendeverwaltung.provider";
     private static final String TAG = "NewUserActivity";
 
     private Uri currentPhotoUri;
     private String currentPhotoName;
+
+    private View.OnClickListener selectImageClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent pickApprenticePhoto = new Intent(Intent.ACTION_PICK,
+                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(pickApprenticePhoto, PICK_IMAGE);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +93,7 @@ public class NewUserActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
 
     @Override
@@ -93,19 +106,79 @@ public class NewUserActivity extends AppCompatActivity {
             if (requestCode == REQUEST_IMAGE_CAPTURE) {
                 photo.setImageURI(currentPhotoUri);
             } else if (requestCode == 2) {
-                Uri selectedImage = data.getData();
+                Uri selectedImageUri = data.getData();
+                String apprenticePhotoPath = selectedImageUri.getPath();
                 String[] filePath = {MediaStore.Images.Media.DATA};
-                Cursor c = getContentResolver().query(selectedImage, filePath, null, null, null);
+            /*    try {*/
+                    File apprenticePhoto = new File(selectedImageUri.getPath());
+                    File[] d = getExternalFilesDir(Environment.DIRECTORY_PICTURES).listFiles();
+
+                String[] projection = { MediaStore.MediaColumns.DATA,
+                        MediaStore.Images.Media.BUCKET_DISPLAY_NAME };
+
+                ArrayList<String> listOfAllImages = getImages();
+               Cursor cursor = getContentResolver().query( MediaStore.Images.Media.EXTERNAL_CONTENT_URI, projection, null,
+                        null, null);
+                    String name = "";
+                int column_index_data = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
+               int  column_index_folder_name = cursor
+                        .getColumnIndexOrThrow(MediaStore.Images.Media.BUCKET_DISPLAY_NAME);
+                while (cursor.moveToNext()) {
+                    String PathOfImage = cursor.getString(column_index_data);
+
+                    listOfAllImages.add(PathOfImage);
+                }
+
+                    currentPhotoName = new File(listOfAllImages.get(0)).getName();
+
+                    photo.setImageURI(selectedImageUri);
+              /*  } catch (Exception ioEx) {
+                    Log.e(TAG, ioEx.getMessage());
+                }*/
+
+
+
+             /*   Cursor c = getContentResolver().query(selectedImageUri, filePath, null, null, null);
                 c.moveToFirst();
                 int columnIndex = c.getColumnIndex(filePath[0]);
                 String picturePath = c.getString(columnIndex);
                 c.close();
                 Bitmap thumbnail = BitmapFactory.decodeFile(picturePath);
                 Log.w(TAG, picturePath);
-                photo.setImageBitmap(thumbnail);
+                photo.setImageBitmap(thumbnail);*/
 
             }
         }
+    }
+
+    public ArrayList<String> getImages()
+    {
+        ArrayList<String> paths = new ArrayList<String>();
+        final String[] columns = { MediaStore.Images.Media.DISPLAY_NAME};
+        String selection = MediaStore.Images.Media.BUCKET_DISPLAY_NAME + " = ?";
+        String[] selectionArgs = new String[] {
+                "Camera"
+        };
+        final String orderBy = MediaStore.Images.Media.DATE_ADDED;
+        //Stores all the images from the gallery in Cursor
+
+        Cursor cursor = getApplicationContext().getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, null, null, null, null);
+        //Total number of images
+        int count = cursor.getCount();
+
+        //Create an array to store path to all the images
+        String[] arrPath = new String[count];
+
+        for (int i = 0; i < count; i++) {
+            cursor.moveToPosition(i);
+            int dataColumnIndex = cursor.getColumnIndex(MediaStore.Images.Media.DATA);
+            //Store the path of the image
+            arrPath[i]= cursor.getString(dataColumnIndex);
+            paths.add(arrPath[i]);
+
+        }
+        cursor.close();
+        return  paths;
     }
 
     private void selectImage() {
@@ -156,13 +229,14 @@ public class NewUserActivity extends AppCompatActivity {
     }
 
     private void openGallery() {
-        Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(intent, 2);
+        Intent pickApprenticePhoto = new Intent(Intent.ACTION_PICK,
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(pickApprenticePhoto, PICK_IMAGE);
     }
 
     private File createImageFile() throws IOException {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_LernendeFoto";
+        String imageFileName = "JPEG_" + timeStamp + "_LernendeFoto_";
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
                 imageFileName,        // Filename without extension
@@ -185,6 +259,7 @@ public class NewUserActivity extends AppCompatActivity {
                 currentPhotoName = "none";
             }
             userDao.insertUser(new User(firstName, lastName, currentPhotoName));
+            List<User> users = userDao.getAll();
             finish();
         }
     }
