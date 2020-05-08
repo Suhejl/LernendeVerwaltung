@@ -36,15 +36,15 @@ public class FullScreenImageActivity extends AppCompatActivity {
         if (callingActivityIntent != null) {
             if (callingActivityIntent.hasExtra(UserlistActivity.EXTRA_USER_ID)) {
                 int apprenticeID = callingActivityIntent.getIntExtra(UserlistActivity.EXTRA_USER_ID, 0);
-                setFullscreenImageById(apprenticeID);
+                setFullScreenImageById(apprenticeID);
             } else{
                 Uri apprenticePhotoUri = callingActivityIntent.getData();
-                setFullscreenImageByUri(apprenticePhotoUri);
+                setFullScreenImageByUri(apprenticePhotoUri);
             }
         }
     }
 
-    private void setFullscreenImageById(int apprenticeID){
+    private void setFullScreenImageById(int apprenticeID){
         ImageView fullScreenImageView = findViewById(R.id.fullScreenImage_ApprenticePhoto);
         User apprentice = userDao.getById(apprenticeID);
 
@@ -57,7 +57,7 @@ public class FullScreenImageActivity extends AppCompatActivity {
         }
     }
 
-    private void setFullscreenImageByUri(Uri apprenticePhotoUri){
+    private void setFullScreenImageByUri(Uri apprenticePhotoUri){
         ImageView fullScreenImageView = findViewById(R.id.fullScreenImage_ApprenticePhoto);
         fullScreenImageView.setImageURI(apprenticePhotoUri);
     }
