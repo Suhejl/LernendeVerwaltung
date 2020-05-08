@@ -1,8 +1,8 @@
 package ch.noseryoung.lernendeverwaltung.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import ch.noseryoung.lernendeverwaltung.R;
 

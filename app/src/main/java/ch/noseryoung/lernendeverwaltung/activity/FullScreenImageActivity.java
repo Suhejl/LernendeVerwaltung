@@ -1,13 +1,13 @@
 package ch.noseryoung.lernendeverwaltung.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.ImageView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import ch.noseryoung.lernendeverwaltung.R;
 import ch.noseryoung.lernendeverwaltung.manager.UserImageViewManager;
@@ -23,10 +23,7 @@ public class FullScreenImageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_full_screen_image);
-
-        if(getSupportActionBar() != null){
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         userDao = MainActivity.getUserDao();
         userImageViewManager = new UserImageViewManager(this);

@@ -13,31 +13,28 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import ch.noseryoung.lernendeverwaltung.R;
 import ch.noseryoung.lernendeverwaltung.repository.User;
 import ch.noseryoung.lernendeverwaltung.repository.UserDao;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class NewUserActivity extends AppCompatActivity {
+public class NewUserMenuActivity extends BaseMenuActivity {
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final String PROVIDER_PATH = "ch.noseryoung.lernendeverwaltung.provider";
@@ -68,7 +65,7 @@ public class NewUserActivity extends AppCompatActivity {
         photoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectImage();
+                openCamera();
             }
         });
 
@@ -78,7 +75,7 @@ public class NewUserActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (currentPhotoUri == null) {
-                    selectImage();
+                    openCamera();
                 } else {
                     openFullscreenApprenticePhoto();
                 }
@@ -95,43 +92,10 @@ public class NewUserActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_IMAGE_CAPTURE) {
                 photo.setImageURI(currentPhotoUri);
-            } else if (requestCode == 2) {
-                Uri selectedImage = data.getData();
-                String[] filePath = {MediaStore.Images.Media.DATA};
-                Cursor c = getContentResolver().query(selectedImage, filePath, null, null, null);
-                c.moveToFirst();
-                int columnIndex = c.getColumnIndex(filePath[0]);
-                String picturePath = c.getString(columnIndex);
-                c.close();
-                Bitmap thumbnail = BitmapFactory.decodeFile(picturePath);
-                Log.w(TAG, picturePath);
-                photo.setImageBitmap(thumbnail);
-
             }
+        } else {
+            currentPhotoUri = null;
         }
-    }
-
-    private void selectImage() {
-        final String takePhotoOption = "Foto aufnehmen";
-        final String chooseGalleryOption = "Foto aus Galerie auswählen";
-        final String cancelOption = "Abbrechen";
-
-        final String[] options = {takePhotoOption, chooseGalleryOption, cancelOption};
-        AlertDialog.Builder builder = new AlertDialog.Builder(NewUserActivity.this);
-        builder.setTitle("Foto hinzufügen");
-        builder.setItems(options, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if (takePhotoOption.equals(options[which])) {
-                    openCamera();
-                } else if (chooseGalleryOption.equals(options[which])) {
-                    openGallery();
-                } else if (cancelOption.equals(options[which])) {
-                    dialog.dismiss();
-                }
-            }
-        });
-        builder.show();
     }
 
     private void openCamera() {
@@ -158,14 +122,9 @@ public class NewUserActivity extends AppCompatActivity {
         }
     }
 
-    private void openGallery() {
-        Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(intent, 2);
-    }
-
     private File createImageFile() throws IOException {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_LernendeFoto";
+        String imageFileName = "JPEG_" + timeStamp + "_LernendeFoto_";
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
                 imageFileName,        // Filename without extension
@@ -217,26 +176,5 @@ public class NewUserActivity extends AppCompatActivity {
         } else {
             return true;
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.main_menu,menu);
-
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        super.onOptionsItemSelected(item);
-
-        if(item.getItemId() == R.id.aboutus) {
-            Intent intend = new Intent(this, AboutUsActivity.class);
-            startActivity(intend);
-            return true;
-        }
-        return false;
     }
 }
