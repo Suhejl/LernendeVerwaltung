@@ -1,9 +1,11 @@
 package ch.noseryoung.lernendeverwaltung.adapter;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,6 +19,8 @@ import ch.noseryoung.lernendeverwaltung.manager.UserImageViewManager;
 import ch.noseryoung.lernendeverwaltung.repository.User;
 
 public class ApprenticeAdapter extends RecyclerView.Adapter<ApprenticeAdapter.ApprenticeViewHolder> {
+    private static final String TAG = "ApprenticeAdapter";
+
     private List<User> apprenticeDataset;
     private UserImageViewManager userImageViewManager;
     private OnListItemClickListener onItemClickListener;
@@ -73,7 +77,7 @@ public class ApprenticeAdapter extends RecyclerView.Adapter<ApprenticeAdapter.Ap
         TextView lastname;
         ImageView userlistPhoto;
 
-        ApprenticeViewHolder(View v, OnListItemClickListener onItemclickListener) {
+        ApprenticeViewHolder(View v, final OnListItemClickListener onItemclickListener) {
             super(v);
             userlistPhoto = v.findViewById(R.id.list_apprentice_userPhoto);
             firstname = v.findViewById(R.id.list_apprentice_firstnameTextView);
@@ -81,10 +85,28 @@ public class ApprenticeAdapter extends RecyclerView.Adapter<ApprenticeAdapter.Ap
 
             this.onItemClickListener = onItemclickListener;
             v.setOnClickListener(this);
+
+            firstname.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    callItemClickListener();
+                }
+            });
+
+            lastname.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    callItemClickListener();
+                }
+            });
         }
 
         @Override
         public void onClick(View v) {
+            callItemClickListener();
+        }
+
+        private void callItemClickListener(){
             onItemClickListener.onItemClick(getAdapterPosition());
         }
     }

@@ -40,8 +40,8 @@ public class UserlistActivity extends BaseMenuActivity implements ApprenticeAdap
 
         loadList();
 
-        Button seeApprenticeButton = findViewById(R.id.userlist_createApprenticeButton);
-        seeApprenticeButton.setOnClickListener(new View.OnClickListener() {
+        Button createApprenticeButton = findViewById(R.id.userlist_createApprenticeButton);
+        createApprenticeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openNewUser();
@@ -73,6 +73,7 @@ public class UserlistActivity extends BaseMenuActivity implements ApprenticeAdap
         ApprenticeAdapter mAdapter = new ApprenticeAdapter(apprentices, this, userImageViewManager);
         recyclerView.setAdapter(mAdapter);
     }
+
     //Opens Activity with user data of clicked entry
     //Method is overridden from ApprenticeAdapter
     @Override
@@ -82,6 +83,7 @@ public class UserlistActivity extends BaseMenuActivity implements ApprenticeAdap
         intent.putExtra(EXTRA_USER_ID, user.getId());
         startActivity(intent);
     }
+
     //Opens Activity with form for creating a new user
     private void openNewUser() {
         Intent intend = new Intent(this, NewUserActivity.class);
