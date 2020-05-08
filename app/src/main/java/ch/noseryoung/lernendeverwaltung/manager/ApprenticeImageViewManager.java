@@ -31,7 +31,7 @@ public class ApprenticeImageViewManager {
      * @return
      */
     public Bitmap getApprenticePhotoAsBitmap(String photoName) {
-        File apprenticePhotoFile = getApprenticePhotoFileFromGallery(photoName);
+        File apprenticePhotoFile = getApprenticePhotoFileFromDirectory(photoName);
 
         if (apprenticePhotoFile == null) {
             Drawable drawable = context.getResources().getDrawable(R.drawable.account_circle);
@@ -52,7 +52,7 @@ public class ApprenticeImageViewManager {
      * @param photoName
      * @return
      */
-    private File getApprenticePhotoFileFromGallery(String photoName) {
+    private File getApprenticePhotoFileFromDirectory(String photoName) {
         File storageDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
 
         try {
