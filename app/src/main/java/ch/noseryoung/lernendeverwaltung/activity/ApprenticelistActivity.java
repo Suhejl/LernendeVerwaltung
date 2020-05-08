@@ -39,6 +39,7 @@ public class ApprenticelistActivity extends BaseMenuActivity implements Apprenti
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_apprenticelist);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(R.string.view_apprentice_list_title);
 
         // Gets dao from MainActivity
         apprenticeDao = MainActivity.getApprenticeDao();

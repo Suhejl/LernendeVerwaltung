@@ -51,6 +51,7 @@ public class NewApprenticeActivity extends BaseMenuActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_apprentice);
+        getSupportActionBar().setTitle(R.string.view_new_apprentice_title);
 
         apprenticeDao = MainActivity.getApprenticeDao();
 

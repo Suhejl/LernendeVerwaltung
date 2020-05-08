@@ -1,5 +1,11 @@
 <resources>
     <string name="view_application_name">Lernende Verwaltung</string>
+    <string name="view_apprentice_data_title">Informationen</string>
+    <string name="view_apprentice_list_title">Benutzerliste</string>
+    <string name="view_new_apprentice_title">Neuer Nutzer</string>
+    <string name="view_image_fullscreen_title">Profilbild</string>
+    <string name="view_about_us_title">Über uns</string>
+
     <string name="view_welcome">Willkommen zu NOA</string>
     <string name="view_see_apprentices">Siehe Lehrnende</string>
 

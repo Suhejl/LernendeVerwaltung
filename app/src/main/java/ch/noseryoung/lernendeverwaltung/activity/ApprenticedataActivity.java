@@ -32,6 +32,7 @@ public class ApprenticedataActivity extends BaseMenuActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_apprentice_data);
+        getSupportActionBar().setTitle(R.string.view_apprentice_data_title);
 
         // Database connection
         ApprenticeDao apprenticeDao = MainActivity.getApprenticeDao();

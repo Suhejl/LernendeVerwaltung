@@ -29,7 +29,6 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".activity.AboutUsActivity"
-            android:parentActivityName=".activity.ApprenticelistActivity"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".activity.MainActivity"

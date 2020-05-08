@@ -33,6 +33,7 @@ public class FullScreenImageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_full_screen_image);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(R.string.view_image_fullscreen_title);
 
         apprenticeDao = MainActivity.getApprenticeDao();
         apprenticeImageViewManager = new ApprenticeImageViewManager(this);
