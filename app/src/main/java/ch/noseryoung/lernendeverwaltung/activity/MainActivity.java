@@ -1,11 +1,11 @@
 package ch.noseryoung.lernendeverwaltung.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import ch.noseryoung.lernendeverwaltung.R;
 import ch.noseryoung.lernendeverwaltung.repository.UserDao;
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openUserlist() {
-        Intent intend = new Intent(this, UserlistActivity.class);
+        Intent intend = new Intent(this, UserlistMenuActivity.class);
         startActivity(intend);
     }
 }

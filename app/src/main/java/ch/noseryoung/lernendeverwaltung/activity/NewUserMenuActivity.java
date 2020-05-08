@@ -13,9 +13,6 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,7 +20,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
 import java.io.File;
@@ -36,7 +32,7 @@ import ch.noseryoung.lernendeverwaltung.repository.User;
 import ch.noseryoung.lernendeverwaltung.repository.UserDao;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class NewUserActivity extends AppCompatActivity {
+public class NewUserMenuActivity extends BaseMenuActivity {
 
     private UserDao userDao;
 
@@ -117,7 +113,7 @@ public class NewUserActivity extends AppCompatActivity {
         final String cancelOption = "Abbrechen";
 
         final String[] options = {takePhotoOption, chooseGalleryOption, cancelOption};
-        AlertDialog.Builder builder = new AlertDialog.Builder(NewUserActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(NewUserMenuActivity.this);
         builder.setTitle("Foto hinzufügen");
         builder.setItems(options, new DialogInterface.OnClickListener() {
             @Override
@@ -217,26 +213,5 @@ public class NewUserActivity extends AppCompatActivity {
         } else {
             return true;
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.main_menu,menu);
-
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        super.onOptionsItemSelected(item);
-
-        if(item.getItemId() == R.id.aboutus) {
-            Intent intend = new Intent(this, AboutUsActivity.class);
-            startActivity(intend);
-            return true;
-        }
-        return false;
     }
 }

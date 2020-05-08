@@ -4,24 +4,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import ch.noseryoung.lernendeverwaltung.adapter.ApprenticeAdapter;
 import ch.noseryoung.lernendeverwaltung.R;
+import ch.noseryoung.lernendeverwaltung.adapter.ApprenticeAdapter;
 import ch.noseryoung.lernendeverwaltung.manager.UserImageViewManager;
 import ch.noseryoung.lernendeverwaltung.repository.User;
 import ch.noseryoung.lernendeverwaltung.repository.UserDao;
 
-public class UserlistActivity extends AppCompatActivity implements ApprenticeAdapter.OnListItemClickListener {
+public class UserlistMenuActivity extends BaseMenuActivity implements ApprenticeAdapter.OnListItemClickListener {
 
     public static final String EXTRA_USER_ID = "ch.noseryoung.lernendeverwaltung.activity.EXTRA_USER_ID";
 
@@ -48,27 +44,6 @@ public class UserlistActivity extends AppCompatActivity implements ApprenticeAda
                 openNewUser();
             }
         });
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.main_menu,menu);
-
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        super.onOptionsItemSelected(item);
-
-        if(item.getItemId() == R.id.aboutus) {
-            Intent intend = new Intent(this, AboutUsActivity.class);
-            startActivity(intend);
-            return true;
-        }
-        return false;
     }
 
     private void loadList(){
@@ -98,13 +73,13 @@ public class UserlistActivity extends AppCompatActivity implements ApprenticeAda
     @Override
     public void onItemClick(int position) {
         User user = apprentices.get(position);
-        Intent intent = new Intent(this, UserdataActivity.class);
+        Intent intent = new Intent(this, UserdataMenuActivity.class);
         intent.putExtra(EXTRA_USER_ID, user.getId());
         startActivity(intent);
     }
 
     private void openNewUser() {
-        Intent intend = new Intent(this, NewUserActivity.class);
+        Intent intend = new Intent(this, NewUserMenuActivity.class);
         startActivity(intend);
     }
 }

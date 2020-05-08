@@ -12,16 +12,16 @@
             android:name=".activity.FullScreenImageActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".activity.NewUserActivity"
-            android:parentActivityName=".activity.UserlistActivity"
+            android:name=".activity.NewUserMenuActivity"
+            android:parentActivityName=".activity.UserlistMenuActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".activity.UserdataActivity"
-            android:parentActivityName=".activity.UserlistActivity"
+            android:name=".activity.UserdataMenuActivity"
+            android:parentActivityName=".activity.UserlistMenuActivity"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".activity.AboutUsActivity"
-            android:parentActivityName=".activity.UserlistActivity"
+            android:parentActivityName=".activity.UserlistMenuActivity"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".activity.MainActivity"
@@ -33,7 +33,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.UserlistActivity"
+            android:name=".activity.UserlistMenuActivity"
             android:parentActivityName=".activity.MainActivity"
             android:theme="@style/AppTheme" />
 

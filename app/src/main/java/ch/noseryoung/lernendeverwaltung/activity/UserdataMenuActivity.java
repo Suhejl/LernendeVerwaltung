@@ -4,21 +4,16 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import ch.noseryoung.lernendeverwaltung.R;
+import ch.noseryoung.lernendeverwaltung.manager.UserImageViewManager;
 import ch.noseryoung.lernendeverwaltung.repository.User;
 import ch.noseryoung.lernendeverwaltung.repository.UserDao;
-import ch.noseryoung.lernendeverwaltung.manager.UserImageViewManager;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class UserdataActivity extends AppCompatActivity {
+public class UserdataMenuActivity extends BaseMenuActivity {
 
     private static final String TAG = "UserdataActivity";
     public static final String EXTRA_USER_IDD = "ch.noseryoung.lernendeverwaltung.activity.EXTRA_USER_IDD";
@@ -42,7 +37,7 @@ public class UserdataActivity extends AppCompatActivity {
         final CircleImageView userPhoto = findViewById(R.id.userdata_userPhoto);
         try {
             Bundle bundle = getIntent().getExtras();
-            int apprenticeID = bundle.getInt(UserlistActivity.EXTRA_USER_ID);
+            int apprenticeID = bundle.getInt(UserlistMenuActivity.EXTRA_USER_ID);
             selectedApprentice = userDao.getById(apprenticeID);
 
 
@@ -70,28 +65,7 @@ public class UserdataActivity extends AppCompatActivity {
 
     private void openFullscreenApprenticePhoto() {
         Intent fullscreenIntent = new Intent(this, FullScreenImageActivity.class);
-        fullscreenIntent.putExtra(UserlistActivity.EXTRA_USER_ID, selectedApprentice.getId());
+        fullscreenIntent.putExtra(UserlistMenuActivity.EXTRA_USER_ID, selectedApprentice.getId());
         startActivity(fullscreenIntent);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.main_menu,menu);
-
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        super.onOptionsItemSelected(item);
-
-        if(item.getItemId() == R.id.aboutus) {
-            Intent intend = new Intent(this, AboutUsActivity.class);
-            startActivity(intend);
-            return true;
-        }
-        return false;
     }
 }
