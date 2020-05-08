@@ -1,6 +1,37 @@
 <resources>
-    <string name="app_name">Lernende Verwaltung</string>
-    <string name="welcome">Willkommen zu NOA</string>
-    <string name="see_apprentices">Siehe Lehrnende</string>
-    <string name="logo_description">NOA Logo</string>
+    <string name="view_application_name">Lernende Verwaltung</string>
+    <string name="view_apprentice_data_title">Informationen</string>
+    <string name="view_apprentice_list_title">Benutzerliste</string>
+    <string name="view_new_apprentice_title">Neuer Nutzer</string>
+    <string name="view_image_fullscreen_title">Profilbild</string>
+    <string name="view_about_us_title">Über uns</string>
+
+    <string name="view_welcome">Willkommen zu NOA</string>
+    <string name="view_see_apprentices">Siehe Lehrnende</string>
+
+    <string name="view_create_apprentice">Erstelle Lernenden</string>
+
+
+    <string name="view_prename">Vorname</string>
+    <string name="view_lastname">Nachname</string>
+
+    <string name="view_david">David Pavlic</string>
+    <string name="view_suhejl">Suhejl Asani</string>
+
+    <string name="view_about_us">Über uns</string>
+
+    <string name="description_logo">NOA logo</string>
+    <string name="description_camera_icon">Camera logo on newUser Activity</string>
+    <string name="description_default_profile_icon">Default apprentice logo on newUser Activity, if no picture is defined</string>
+    <string name="description_userlist_photo">Photo of the apprentice in list</string>
+    <string name="description_creator_david">Picture of the creator of the app: David Pavlic</string>
+    <string name="description_creator_suhejl">Picture of the creator of the app: Suhejl Asani</string>
+    <string name="description_fullscreen_apprentice_photo">Apprentice Photo in full screen</string>
+    <string name="description_about_us_activity">This activity shows the about us screen</string>
+    <string name="description_apprentice_data_activity">This activity shows the apprentice data screen</string>
+    <string name="description_apprentice_list_activity">This activity shows the apprentice list screen</string>
+    <string name="description_fullscreen_activity">This activity shows the fullscreen of an image</string>
+    <string name="description_main_activity">This activity shows the home screen</string>
+    <string name="description_new_user_activity">This activity shows the screen to create a new user</string>
+    <string name="description_list_apprentice_fragment">This is a fragment of a apprentice list item</string>
 </resources>

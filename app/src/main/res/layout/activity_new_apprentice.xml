@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/newApprentice"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_background"
+    android:contentDescription="@string/description_new_user_activity"
+    tools:context=".activity.NewApprenticeActivity">
+
+    <Button
+        android:id="@+id/newApprentice_createButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:background="@color/button_color"
+        android:text="@string/view_create_apprentice"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newApprentice_lastnamePlainText" />
+
+    <EditText
+        android:id="@+id/newApprentice_firstnamePlainText"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:ems="10"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newApprentice_firstnameTextView"
+        tools:ignore="LabelFor" />
+
+    <EditText
+        android:id="@+id/newApprentice_lastnamePlainText"
+        android:layout_width="347dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:ems="10"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newApprentice_lastnameTextView"
+        tools:ignore="LabelFor" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/newApprentice_apprenticePhoto"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="32dp"
+        android:contentDescription="@string/description_default_profile_icon"
+        android:src="@drawable/account_circle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/newApprentice_lastnameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/view_lastname"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newApprentice_firstnamePlainText" />
+
+    <TextView
+        android:id="@+id/newApprentice_firstnameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/view_prename"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newApprentice_apprenticePhoto" />
+
+    <Button
+        android:id="@+id/newApprentice_photoButton"
+        android:layout_width="56dp"
+        android:layout_height="53dp"
+        android:background="@drawable/camera_alt"
+        android:contentDescription="@string/description_camera_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/newApprentice_apprenticePhoto"
+        app:layout_constraintEnd_toEndOf="@+id/newApprentice_apprenticePhoto" />
+</androidx.constraintlayout.widget.ConstraintLayout>
