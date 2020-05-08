@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -24,7 +23,10 @@ public class FullScreenImageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_full_screen_image);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         userDao = MainActivity.getUserDao();
         userImageViewManager = new UserImageViewManager(this);
@@ -32,7 +34,6 @@ public class FullScreenImageActivity extends AppCompatActivity {
         Intent callingActivityIntent = getIntent();
 
         if (callingActivityIntent != null) {
-
             if (callingActivityIntent.hasExtra(UserlistActivity.EXTRA_USER_ID)) {
                 int apprenticeID = callingActivityIntent.getIntExtra(UserlistActivity.EXTRA_USER_ID, 0);
                 setFullscreenImageById(apprenticeID);
@@ -46,12 +47,11 @@ public class FullScreenImageActivity extends AppCompatActivity {
     private void setFullscreenImageById(int apprenticeID){
         ImageView fullScreenImageView = findViewById(R.id.fullScreenImage_ApprenticePhoto);
         User apprentice = userDao.getById(apprenticeID);
-        fullScreenImageView.getDrawable().toString();
 
         if (apprentice != null) {
             Bitmap apprenticePhotoBitmap = userImageViewManager.getUserPhotoAsBitmap(apprentice.getPicture());
 
-            if (apprenticePhotoBitmap != null && fullScreenImageView != null) {
+            if (apprenticePhotoBitmap != null) {
                 fullScreenImageView.setImageBitmap(apprenticePhotoBitmap);
             }
         }
@@ -65,12 +65,10 @@ public class FullScreenImageActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle presses on the action bar items
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 }

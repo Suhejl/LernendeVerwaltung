@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,8 +26,11 @@ public class UserlistActivity extends AppCompatActivity implements ApprenticeAda
 
     public static final String EXTRA_USER_ID = "ch.noseryoung.lernendeverwaltung.activity.EXTRA_USER_ID";
 
+    //list containing all users and their data
     private List<User> apprentices = new ArrayList<>();
+    //database connection
     private UserDao userDao;
+    //returns picture depending on the string given to it
     private UserImageViewManager userImageViewManager;
 
     @Override
@@ -51,6 +55,47 @@ public class UserlistActivity extends AppCompatActivity implements ApprenticeAda
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        //reloads list after a new user was created
+        loadList();
+    }
+
+    private void loadList(){
+        //loads list from database
+        apprentices = userDao.getAll();
+
+        RecyclerView recyclerView = findViewById(R.id.userlist_apprenticesList);
+        // uses this setting to improve performance if the changes are known
+        // in content does not change the layout size of the RecyclerView
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setNestedScrollingEnabled(false);
+        // uses a linear layout manager
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        // specifies an adapter
+        ApprenticeAdapter mAdapter = new ApprenticeAdapter(apprentices, this, userImageViewManager);
+        recyclerView.setAdapter(mAdapter);
+    }
+    //Opens Activity with user data of clicked entry
+    //Method is overridden from ApprenticeAdapter
+    @Override
+    public void onItemClick(int position) {
+        User user = apprentices.get(position);
+        Intent intent = new Intent(this, UserdataActivity.class);
+        intent.putExtra(EXTRA_USER_ID, user.getId());
+        startActivity(intent);
+    }
+    //Opens Activity with form for creating a new user
+    private void openNewUser() {
+        Intent intend = new Intent(this, NewUserActivity.class);
+        startActivity(intend);
+    }
+
+    //Menu Methods
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
         MenuInflater menuInflater = getMenuInflater();
@@ -60,7 +105,7 @@ public class UserlistActivity extends AppCompatActivity implements ApprenticeAda
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         super.onOptionsItemSelected(item);
 
         if(item.getItemId() == R.id.aboutus) {
@@ -69,42 +114,5 @@ public class UserlistActivity extends AppCompatActivity implements ApprenticeAda
             return true;
         }
         return false;
-    }
-
-    private void loadList(){
-        //loads list from database
-        apprentices = userDao.getAll();
-
-        RecyclerView recyclerView = findViewById(R.id.userlist_apprenticesList);
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setNestedScrollingEnabled(false);
-        // use a linear layout manager
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-
-        // specify an adapter (see also next example)
-        ApprenticeAdapter mAdapter = new ApprenticeAdapter(apprentices, this, userImageViewManager);
-        recyclerView.setAdapter(mAdapter);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        loadList();
-    }
-
-    @Override
-    public void onItemClick(int position) {
-        User user = apprentices.get(position);
-        Intent intent = new Intent(this, UserdataActivity.class);
-        intent.putExtra(EXTRA_USER_ID, user.getId());
-        startActivity(intent);
-    }
-
-    private void openNewUser() {
-        Intent intend = new Intent(this, NewUserActivity.class);
-        startActivity(intend);
     }
 }

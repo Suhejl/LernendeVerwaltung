@@ -22,6 +22,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
@@ -38,14 +39,13 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class NewUserActivity extends AppCompatActivity {
 
-    private UserDao userDao;
-
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final String PROVIDER_PATH = "ch.noseryoung.lernendeverwaltung.provider";
     private static final String TAG = "NewUserActivity";
 
     private Uri currentPhotoUri;
     private String currentPhotoName;
+    private UserDao userDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -229,7 +229,7 @@ public class NewUserActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         super.onOptionsItemSelected(item);
 
         if(item.getItemId() == R.id.aboutus) {

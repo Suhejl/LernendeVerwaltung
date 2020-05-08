@@ -21,7 +21,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/userlist_lastnameTextView"
         android:layout_width="69dp"
         android:layout_height="19dp"
         android:text="@string/lastname"
@@ -63,7 +62,6 @@
         app:layout_constraintVertical_bias="0.216" />
 
     <View
-        android:id="@+id/divider"
         android:layout_width="409dp"
         android:layout_height="1dp"
         android:background="?android:attr/listDivider"

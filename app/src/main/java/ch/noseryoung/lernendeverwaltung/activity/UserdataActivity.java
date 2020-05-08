@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import ch.noseryoung.lernendeverwaltung.R;
@@ -21,11 +22,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class UserdataActivity extends AppCompatActivity {
 
     private static final String TAG = "UserdataActivity";
-    public static final String EXTRA_USER_IDD = "ch.noseryoung.lernendeverwaltung.activity.EXTRA_USER_IDD";
 
-    private UserDao userDao;
-    private UserImageViewManager userImageViewManager;
-
+    //Userdata which are shown
     private User selectedApprentice;
 
     @Override
@@ -33,27 +31,30 @@ public class UserdataActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_data);
 
-        userDao = MainActivity.getUserDao();
-        userImageViewManager = new UserImageViewManager(this);
+        //database connection
+        UserDao userDao = MainActivity.getUserDao();
+        //returns picture depending on the string given to it
+        UserImageViewManager userImageViewManager = new UserImageViewManager(this);
 
 
         TextView firstnameTextView = findViewById(R.id.userdata_firstname);
         TextView lastnameTextView = findViewById(R.id.userdata_lastname);
-        final CircleImageView userPhoto = findViewById(R.id.userdata_userPhoto);
+        CircleImageView userPhoto = findViewById(R.id.userdata_userPhoto);
+
         try {
+            //fetch user by given userid in bundle
             Bundle bundle = getIntent().getExtras();
             int apprenticeID = bundle.getInt(UserlistActivity.EXTRA_USER_ID);
             selectedApprentice = userDao.getById(apprenticeID);
 
-
-            firstnameTextView.setText(selectedApprentice.getFirstName());
-            lastnameTextView.setText(selectedApprentice.getLastName());
-
-            Bitmap userPhotoBitmap = userImageViewManager.getUserPhotoAsBitmap(selectedApprentice.getPicture());
-
-            userPhoto.setImageBitmap(userPhotoBitmap);
-
+            //checks if a user with given id exists in database
             if (selectedApprentice != null) {
+                firstnameTextView.setText(selectedApprentice.getFirstName());
+                lastnameTextView.setText(selectedApprentice.getLastName());
+
+                Bitmap userPhotoBitmap = userImageViewManager.getUserPhotoAsBitmap(selectedApprentice.getPicture());
+                userPhoto.setImageBitmap(userPhotoBitmap);
+
                 userPhoto.setOnClickListener(new View.OnClickListener() {
 
                     @Override
@@ -61,33 +62,35 @@ public class UserdataActivity extends AppCompatActivity {
                         openFullscreenApprenticePhoto();
                     }
                 });
+            }else{
+                Log.w(TAG, "User with id: " + apprenticeID + " does not exist");
             }
 
         } catch (NullPointerException nullex) {
             Log.w(TAG, nullex.getMessage());
         }
     }
-
+    //opens new activity, that shows the profile picture in fullscreen
     private void openFullscreenApprenticePhoto() {
         Intent fullscreenIntent = new Intent(this, FullScreenImageActivity.class);
         fullscreenIntent.putExtra(UserlistActivity.EXTRA_USER_ID, selectedApprentice.getId());
         startActivity(fullscreenIntent);
     }
-
+    //Menu Methods
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.main_menu,menu);
+        menuInflater.inflate(R.menu.main_menu, menu);
 
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         super.onOptionsItemSelected(item);
 
-        if(item.getItemId() == R.id.aboutus) {
+        if (item.getItemId() == R.id.aboutus) {
             Intent intend = new Intent(this, AboutUsActivity.class);
             startActivity(intend);
             return true;

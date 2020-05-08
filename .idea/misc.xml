@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="EntryPointsManager">
+    <pattern value="ch.noseryoung.lernendeverwaltung.repository.User" method="setFirstName" />
+    <pattern value="ch.noseryoung.lernendeverwaltung.repository.User" method="setLastName" />
+    <pattern value="ch.noseryoung.lernendeverwaltung.repository.User" method="setPicture" />
+    <pattern value="ch.noseryoung.lernendeverwaltung.repository.User" />
+  </component>
   <component name="NullableNotNullManager">
     <option name="myDefaultNullable" value="org.jetbrains.annotations.Nullable" />
     <option name="myDefaultNotNull" value="androidx.annotation.NonNull" />

@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -70,19 +69,12 @@ public class ApprenticeAdapter extends RecyclerView.Adapter<ApprenticeAdapter.Ap
     public static class ApprenticeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         OnListItemClickListener onItemClickListener;
 
-        // each data item is just a string in this case
-        HorizontalScrollView firstnameScrollView;
-        HorizontalScrollView lastnameScrollView;
-
         TextView firstname;
         TextView lastname;
         ImageView userlistPhoto;
 
         ApprenticeViewHolder(View v, OnListItemClickListener onItemclickListener) {
             super(v);
-            firstnameScrollView = v.findViewById(R.id.list_apprentice_firstnameScrollView);
-            lastnameScrollView = v.findViewById(R.id.list_apprentice_lastnameScrollView);
-
             userlistPhoto = v.findViewById(R.id.list_apprentice_userPhoto);
             firstname = v.findViewById(R.id.list_apprentice_firstnameTextView);
             lastname = v.findViewById(R.id.list_apprentice_lastnameTextView);
