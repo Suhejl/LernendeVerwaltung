@@ -46,6 +46,7 @@ public class FullScreenImageActivity extends AppCompatActivity {
     private void setFullscreenImageByBitmap(int apprenticeID){
         ImageView fullScreenImageView = findViewById(R.id.fullScreenImage_ApprenticePhoto);
         User apprentice = userDao.getById(apprenticeID);
+        fullScreenImageView.getDrawable().toString();
 
         if (apprentice != null) {
             Bitmap apprenticePhotoBitmap = userImageViewManager.getUserPhotoAsBitmap(apprentice.getPicture());
