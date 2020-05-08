@@ -8,6 +8,8 @@ import android.graphics.drawable.Drawable;
 import android.os.Environment;
 import android.util.Log;
 
+import androidx.core.content.res.ResourcesCompat;
+
 import java.io.File;
 
 import ch.noseryoung.lernendeverwaltung.R;
@@ -25,7 +27,7 @@ public class UserImageViewManager {
         File userPhotoFile = getUserPhotoFileFromGallery(photoName);
 
         if (userPhotoFile == null) {
-            Drawable drawable = context.getResources().getDrawable(R.drawable.account_circle);
+            Drawable drawable = ResourcesCompat.getDrawable(context.getResources(), R.drawable.account_circle, null);
             return ((BitmapDrawable) drawable).getBitmap();
         }
 
