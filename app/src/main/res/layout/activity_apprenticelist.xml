@@ -2,18 +2,20 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/apprenticelist"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/default_background"
-    tools:context=".activity.UserlistMenuActivity">
+    android:contentDescription="@string/description_apprentice_list_activity"
+    tools:context=".activity.ApprenticelistActivity">
 
     <Button
-        android:id="@+id/userlist_createApprenticeButton"
+        android:id="@+id/apprenticelist_createApprenticeButton"
         android:layout_width="310dp"
         android:layout_height="52dp"
         android:layout_marginTop="64dp"
-        android:background="@color/green"
-        android:text="@string/create_apprentice"
+        android:background="@color/button_color"
+        android:text="@string/view_create_apprentice"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.48"
@@ -21,33 +23,33 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/userlist_lastnameTextView"
+        android:id="@+id/apprenticelist_lastnameTextView"
         android:layout_width="wrap_content"
         android:layout_height="19dp"
-        android:text="@string/lastname"
+        android:text="@string/view_lastname"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.525"
-        app:layout_constraintStart_toEndOf="@+id/userlist_firstnameTextView"
-        app:layout_constraintTop_toBottomOf="@+id/userlist_createApprenticeButton"
+        app:layout_constraintStart_toEndOf="@+id/apprenticelist_firstnameTextView"
+        app:layout_constraintTop_toBottomOf="@+id/apprenticelist_createApprenticeButton"
         app:layout_constraintVertical_bias="0.156" />
 
     <TextView
-        android:id="@+id/userlist_firstnameTextView"
+        android:id="@+id/apprenticelist_firstnameTextView"
         android:layout_width="wrap_content"
         android:layout_height="19dp"
-        android:text="@string/prename"
+        android:text="@string/view_prename"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.237"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userlist_createApprenticeButton"
+        app:layout_constraintTop_toBottomOf="@+id/apprenticelist_createApprenticeButton"
         app:layout_constraintVertical_bias="0.156" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/userlist_apprenticesList"
+        android:id="@+id/apprenticelist_apprenticesList"
         android:layout_width="401dp"
         android:layout_height="386dp"
         android:layout_marginStart="8dp"
@@ -61,18 +63,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userlist_createApprenticeButton"
+        app:layout_constraintTop_toBottomOf="@+id/apprenticelist_createApprenticeButton"
         app:layout_constraintVertical_bias="0.216" />
 
     <View
-        android:id="@+id/divider"
+        android:id="@+id/apprenticelist_divider"
         android:layout_width="409dp"
         android:layout_height="1dp"
         android:background="?android:attr/listDivider"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userlist_createApprenticeButton"
+        app:layout_constraintTop_toBottomOf="@+id/apprenticelist_createApprenticeButton"
         app:layout_constraintVertical_bias="0.21" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

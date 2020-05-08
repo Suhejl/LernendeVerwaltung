@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,19 +13,24 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import ch.noseryoung.lernendeverwaltung.R;
-import ch.noseryoung.lernendeverwaltung.manager.UserImageViewManager;
-import ch.noseryoung.lernendeverwaltung.repository.User;
+import ch.noseryoung.lernendeverwaltung.manager.ApprenticeImageViewManager;
+import ch.noseryoung.lernendeverwaltung.repository.Apprentice;
 
+/**
+ *
+ */
 public class ApprenticeAdapter extends RecyclerView.Adapter<ApprenticeAdapter.ApprenticeViewHolder> {
-    private List<User> apprenticeDataset;
-    private UserImageViewManager userImageViewManager;
+    private static final String TAG = "ApprenticeAdapter";
+
+    private List<Apprentice> apprenticeDataset;
+    private ApprenticeImageViewManager apprenticeImageViewManager;
     private OnListItemClickListener onItemClickListener;
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public ApprenticeAdapter(List<User> apprenticeDataset, OnListItemClickListener onItemClickListener, UserImageViewManager userImageViewManager) {
+    public ApprenticeAdapter(List<Apprentice> apprenticeDataset, OnListItemClickListener onItemClickListener, ApprenticeImageViewManager apprenticeImageViewManager) {
         this.apprenticeDataset = apprenticeDataset;
         this.onItemClickListener = onItemClickListener;
-        this.userImageViewManager = userImageViewManager;
+        this.apprenticeImageViewManager = apprenticeImageViewManager;
     }
 
     // Create new views (invoked by the layout manager)
@@ -51,7 +55,7 @@ public class ApprenticeAdapter extends RecyclerView.Adapter<ApprenticeAdapter.Ap
         String firstName = apprenticeDataset.get(position).getFirstName();
         String lastName = apprenticeDataset.get(position).getLastName();
         String userPhotoName = apprenticeDataset.get(position).getPicture();
-        Bitmap userPhoto = userImageViewManager.getUserPhotoAsBitmap(userPhotoName);
+        Bitmap userPhoto = apprenticeImageViewManager.getApprenticePhotoAsBitmap(userPhotoName);
 
         holder.firstname.setText(firstName);
         holder.lastname.setText(lastName);
@@ -70,29 +74,40 @@ public class ApprenticeAdapter extends RecyclerView.Adapter<ApprenticeAdapter.Ap
     public static class ApprenticeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         OnListItemClickListener onItemClickListener;
 
-        // each data item is just a string in this case
-        HorizontalScrollView firstnameScrollView;
-        HorizontalScrollView lastnameScrollView;
-
         TextView firstname;
         TextView lastname;
         ImageView userlistPhoto;
 
-        ApprenticeViewHolder(View v, OnListItemClickListener onItemclickListener) {
+        ApprenticeViewHolder(View v, final OnListItemClickListener onItemclickListener) {
             super(v);
-            firstnameScrollView = v.findViewById(R.id.list_apprentice_firstnameScrollView);
-            lastnameScrollView = v.findViewById(R.id.list_apprentice_lastnameScrollView);
-
             userlistPhoto = v.findViewById(R.id.list_apprentice_userPhoto);
             firstname = v.findViewById(R.id.list_apprentice_firstnameTextView);
             lastname = v.findViewById(R.id.list_apprentice_lastnameTextView);
 
             this.onItemClickListener = onItemclickListener;
             v.setOnClickListener(this);
+
+            firstname.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    callItemClickListener();
+                }
+            });
+
+            lastname.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    callItemClickListener();
+                }
+            });
         }
 
         @Override
         public void onClick(View v) {
+            callItemClickListener();
+        }
+
+        private void callItemClickListener(){
             onItemClickListener.onItemClick(getAdapterPosition());
         }
     }

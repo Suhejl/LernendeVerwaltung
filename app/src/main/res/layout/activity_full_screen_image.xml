@@ -2,15 +2,17 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fullScreenImage"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:contentDescription="@string/description_fullscreen_activity"
     tools:context=".activity.FullScreenImageActivity">
 
     <ImageView
         android:id="@+id/fullScreenImage_ApprenticePhoto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:contentDescription="@string/fullscreen_apprentice_photo_description"
+        android:contentDescription="@string/description_fullscreen_apprentice_photo"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -2,26 +2,33 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ch.noseryoung.lernendeverwaltung">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="@string/view_application_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true">
         <activity
             android:name=".activity.FullScreenImageActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".activity.NewUserMenuActivity"
-            android:parentActivityName=".activity.UserlistMenuActivity"
+            android:name=".activity.NewApprenticeActivity"
+            android:parentActivityName=".activity.ApprenticelistActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".activity.UserdataMenuActivity"
-            android:parentActivityName=".activity.UserlistMenuActivity"
+            android:name=".activity.ApprenticedataActivity"
+            android:parentActivityName=".activity.ApprenticelistActivity"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".activity.AboutUsActivity"
-            android:parentActivityName=".activity.UserlistMenuActivity"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".activity.MainActivity"
@@ -33,7 +40,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.UserlistMenuActivity"
+            android:name=".activity.ApprenticelistActivity"
             android:parentActivityName=".activity.MainActivity"
             android:theme="@style/AppTheme" />
 
@@ -47,12 +54,5 @@
                 android:resource="@xml/provider_paths" />
         </provider>
     </application>
-
-    <uses-feature
-        android:name="android.hardware.camera"
-        android:required="true" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 </manifest>

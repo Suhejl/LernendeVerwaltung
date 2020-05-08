@@ -2,29 +2,15 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/apprenticedata"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/default_background"
-    tools:context=".activity.NewUserMenuActivity">
+    android:contentDescription="@string/description_apprentice_data_activity"
+    tools:context=".activity.ApprenticedataActivity">
 
-    <Button
-        android:id="@+id/newUser_createButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:background="@color/green"
-        android:text="@string/create_apprentice"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newUser_lastnamePlainText" />
-
-    <EditText
-        android:id="@+id/newUser_firstnamePlainText"
+    <TextView
+        android:id="@+id/apprenticedata_firstname"
         android:layout_width="0dp"
         android:layout_height="45dp"
         android:layout_marginStart="32dp"
@@ -32,17 +18,18 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
-        android:background="@color/textField"
+        android:background="@drawable/textview_bottomline"
         android:ems="10"
-        android:importantForAutofill="no"
-        android:inputType="textPersonName"
+        android:gravity="start|center_vertical"
+        android:textColor="@color/black"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newUser_firstnameTextView"
+        app:layout_constraintTop_toBottomOf="@+id/apprenticedata_firstnameTextView"
         tools:ignore="LabelFor" />
 
-    <EditText
-        android:id="@+id/newUser_lastnamePlainText"
+    <TextView
+        android:id="@+id/apprenticedata_lastname"
         android:layout_width="347dp"
         android:layout_height="45dp"
         android:layout_marginStart="32dp"
@@ -50,57 +37,50 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
-        android:background="@color/textField"
+        android:background="@drawable/textview_bottomline"
         android:ems="10"
-        android:importantForAutofill="no"
-        android:inputType="textPersonName"
+        android:gravity="start|center_vertical"
+        android:textColor="@color/black"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newUser_lastnameTextView"
+        app:layout_constraintTop_toBottomOf="@+id/apprenticedata_lastnameTextView"
         tools:ignore="LabelFor" />
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/newUser_userPhoto"
+        android:id="@+id/apprenticedata_apprenticePhoto"
         android:layout_width="250dp"
         android:layout_height="250dp"
-        android:layout_marginTop="32dp"
-        android:contentDescription="@string/newUser_userLogo"
+        android:layout_marginTop="56dp"
+        android:contentDescription="@string/description_default_profile_icon"
         android:src="@drawable/account_circle"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/newUser_lastnameTextView"
+        android:id="@+id/apprenticedata_lastnameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="32dp"
-        android:text="@string/lastname"
+        android:text="@string/view_lastname"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newUser_firstnamePlainText" />
+        app:layout_constraintTop_toBottomOf="@+id/apprenticedata_firstname" />
 
     <TextView
-        android:id="@+id/newUser_firstnameTextView"
+        android:id="@+id/apprenticedata_firstnameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="32dp"
-        android:text="@string/prename"
+        android:text="@string/view_prename"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newUser_userPhoto" />
+        app:layout_constraintTop_toBottomOf="@+id/apprenticedata_apprenticePhoto" />
 
-    <Button
-        android:id="@+id/newUser_photoButton"
-        android:layout_width="56dp"
-        android:layout_height="53dp"
-        android:background="@drawable/camera_alt"
-        android:contentDescription="@string/newUser_cameraLogo"
-        app:layout_constraintBottom_toBottomOf="@+id/newUser_userPhoto"
-        app:layout_constraintEnd_toEndOf="@+id/newUser_userPhoto" />
 </androidx.constraintlayout.widget.ConstraintLayout>

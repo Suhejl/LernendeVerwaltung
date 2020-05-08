@@ -4,15 +4,20 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "users")
-public class User {
+/**
+ * Class that represents the entity in the database.
+ */
+@Entity(tableName = "apprentices")
+public class Apprentice {
 
-    public User(String firstName, String lastName, String picture){
+    // Constructor of Apprentice
+    public Apprentice(String firstName, String lastName, String picture){
         this.firstName = firstName;
         this.lastName = lastName;
         this.picture = picture;
     }
 
+    // ID for identification of every dataset
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     private int id;
@@ -23,8 +28,11 @@ public class User {
     @ColumnInfo(name = "last_name")
     private String lastName;
 
+    // Saves String of the path to the picture on the phone
     @ColumnInfo(name = "picture")
     private String picture;
+
+    // Getter and Setters
 
     public int getId() {
         return id;
