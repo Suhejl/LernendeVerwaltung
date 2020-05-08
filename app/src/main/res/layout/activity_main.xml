@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/homescreen_background"
+    android:background="@color/default_background"
     tools:context=".activity.MainActivity">
 
     <TextView
@@ -36,7 +36,7 @@
         android:id="@+id/home_seeApprenticesButton"
         android:layout_width="227dp"
         android:layout_height="41dp"
-        android:background="@color/see_apprentices_button_background"
+        android:background="@color/green"
         android:text="@string/see_apprentices"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
