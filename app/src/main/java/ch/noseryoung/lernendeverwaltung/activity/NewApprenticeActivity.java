@@ -200,7 +200,7 @@ public class NewApprenticeActivity extends BaseMenuActivity {
         // Represents the current instance of this activity and is used to make Toasts
         Context context = getApplicationContext();
 
-        if (name.trim().length() >= 50) {
+        if (name.trim().length() > 50) {
             Toast toast = Toast.makeText(context, name + " ist zu lange. Bitte geben Sie ein Namen unter 50 Zeichen ein.", Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.TOP, 0, 0);
             toast.show();
