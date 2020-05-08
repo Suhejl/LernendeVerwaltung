@@ -22,21 +22,23 @@
 
     <TextView
         android:id="@+id/userlist_lastnameTextView"
-        android:layout_width="69dp"
+        android:layout_width="wrap_content"
         android:layout_height="19dp"
         android:text="@string/lastname"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintHorizontal_bias="0.525"
         app:layout_constraintStart_toEndOf="@+id/userlist_firstnameTextView"
         app:layout_constraintTop_toBottomOf="@+id/userlist_createApprenticeButton"
         app:layout_constraintVertical_bias="0.156" />
 
     <TextView
         android:id="@+id/userlist_firstnameTextView"
-        android:layout_width="62dp"
+        android:layout_width="wrap_content"
         android:layout_height="19dp"
         android:text="@string/prename"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.237"
