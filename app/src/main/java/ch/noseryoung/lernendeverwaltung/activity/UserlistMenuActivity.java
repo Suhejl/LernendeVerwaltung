@@ -5,20 +5,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import ch.noseryoung.lernendeverwaltung.adapter.ApprenticeAdapter;
 import ch.noseryoung.lernendeverwaltung.R;
+import ch.noseryoung.lernendeverwaltung.adapter.ApprenticeAdapter;
 import ch.noseryoung.lernendeverwaltung.manager.UserImageViewManager;
 import ch.noseryoung.lernendeverwaltung.repository.User;
 import ch.noseryoung.lernendeverwaltung.repository.UserDao;
 
-public class UserlistActivity extends AppCompatActivity implements ApprenticeAdapter.OnListItemClickListener {
+public class UserlistMenuActivity extends BaseMenuActivity implements ApprenticeAdapter.OnListItemClickListener {
 
     public static final String EXTRA_USER_ID = "ch.noseryoung.lernendeverwaltung.activity.EXTRA_USER_ID";
 
@@ -74,13 +73,13 @@ public class UserlistActivity extends AppCompatActivity implements ApprenticeAda
     @Override
     public void onItemClick(int position) {
         User user = apprentices.get(position);
-        Intent intent = new Intent(this, UserdataActivity.class);
+        Intent intent = new Intent(this, UserdataMenuActivity.class);
         intent.putExtra(EXTRA_USER_ID, user.getId());
         startActivity(intent);
     }
 
     private void openNewUser() {
-        Intent intend = new Intent(this, NewUserActivity.class);
+        Intent intend = new Intent(this, NewUserMenuActivity.class);
         startActivity(intend);
     }
 }

@@ -1,14 +1,13 @@
 package ch.noseryoung.lernendeverwaltung.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.widget.ImageView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import ch.noseryoung.lernendeverwaltung.R;
 import ch.noseryoung.lernendeverwaltung.manager.UserImageViewManager;
@@ -33,19 +32,20 @@ public class FullScreenImageActivity extends AppCompatActivity {
 
         if (callingActivityIntent != null) {
 
-            if (callingActivityIntent.hasExtra(UserlistActivity.EXTRA_USER_ID)) {
-                int apprenticeID = callingActivityIntent.getIntExtra(UserlistActivity.EXTRA_USER_ID, 0);
-                setFullscreenImageByBitmap(apprenticeID);
-            } else {
+            if (callingActivityIntent.hasExtra(UserlistMenuActivity.EXTRA_USER_ID)) {
+                int apprenticeID = callingActivityIntent.getIntExtra(UserlistMenuActivity.EXTRA_USER_ID, 0);
+                setFullscreenImageById(apprenticeID);
+            } else{
                 Uri apprenticePhotoUri = callingActivityIntent.getData();
                 setFullscreenImageByUri(apprenticePhotoUri);
             }
         }
     }
 
-    private void setFullscreenImageByBitmap(int apprenticeID){
+    private void setFullscreenImageById(int apprenticeID){
         ImageView fullScreenImageView = findViewById(R.id.fullScreenImage_ApprenticePhoto);
         User apprentice = userDao.getById(apprenticeID);
+        fullScreenImageView.getDrawable().toString();
 
         if (apprentice != null) {
             Bitmap apprenticePhotoBitmap = userImageViewManager.getUserPhotoAsBitmap(apprentice.getPicture());

@@ -20,7 +20,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
 import java.io.File;
@@ -35,7 +34,7 @@ import ch.noseryoung.lernendeverwaltung.repository.User;
 import ch.noseryoung.lernendeverwaltung.repository.UserDao;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class NewUserActivity extends AppCompatActivity {
+public class NewUserMenuActivity extends BaseMenuActivity {
 
     private UserDao userDao;
 
@@ -187,7 +186,7 @@ public class NewUserActivity extends AppCompatActivity {
         final String cancelOption = "Abbrechen";
 
         final String[] options = {takePhotoOption, chooseGalleryOption, cancelOption};
-        AlertDialog.Builder builder = new AlertDialog.Builder(NewUserActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(NewUserMenuActivity.this);
         builder.setTitle("Foto hinzufügen");
         builder.setItems(options, new DialogInterface.OnClickListener() {
             @Override

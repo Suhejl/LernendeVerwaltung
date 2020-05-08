@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/default_background"
-    tools:context=".activity.UserlistActivity">
+    tools:context=".activity.UserlistMenuActivity">
 
     <Button
         android:id="@+id/userlist_createApprenticeButton"
@@ -16,58 +16,63 @@
         android:text="@string/create_apprentice"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.48"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/userlist_lastnameTextView"
-        android:layout_width="69dp"
+        android:layout_width="wrap_content"
         android:layout_height="19dp"
         android:text="@string/lastname"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.559"
+        app:layout_constraintHorizontal_bias="0.525"
         app:layout_constraintStart_toEndOf="@+id/userlist_firstnameTextView"
         app:layout_constraintTop_toBottomOf="@+id/userlist_createApprenticeButton"
-        app:layout_constraintVertical_bias="0.109" />
+        app:layout_constraintVertical_bias="0.156" />
 
     <TextView
         android:id="@+id/userlist_firstnameTextView"
-        android:layout_width="62dp"
+        android:layout_width="wrap_content"
         android:layout_height="19dp"
         android:text="@string/prename"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.295"
+        app:layout_constraintHorizontal_bias="0.237"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userlist_createApprenticeButton"
-        app:layout_constraintVertical_bias="0.109" />
-
-    <View
-        android:id="@+id/divider"
-        android:layout_width="400dp"
-        android:layout_height="5dp"
-        android:layout_marginTop="84dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userlist_createApprenticeButton" />
+        app:layout_constraintVertical_bias="0.156" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/userlist_apprenticesList"
-        android:layout_width="409dp"
-        android:layout_height="390dp"
+        android:layout_width="401dp"
+        android:layout_height="386dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginTop="128dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginBottom="92dp"
         android:maxHeight="350dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider"
-        app:layout_constraintVertical_bias="0.063" />
+        app:layout_constraintTop_toBottomOf="@+id/userlist_createApprenticeButton"
+        app:layout_constraintVertical_bias="0.216" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userlist_createApprenticeButton"
+        app:layout_constraintVertical_bias="0.21" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,13 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ch.noseryoung.lernendeverwaltung">
 
-    <uses-feature
-        android:name="android.hardware.camera"
-        android:required="true" />
-
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,14 +10,18 @@
         android:supportsRtl="true">
         <activity
             android:name=".activity.FullScreenImageActivity"
-            android:theme="@style/AppTheme"/>
-        <activity
-            android:name=".activity.NewUserActivity"
-            android:parentActivityName=".activity.UserlistActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".activity.UserdataActivity"
-            android:parentActivityName=".activity.UserlistActivity"
+            android:name=".activity.NewUserMenuActivity"
+            android:parentActivityName=".activity.UserlistMenuActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activity.UserdataMenuActivity"
+            android:parentActivityName=".activity.UserlistMenuActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activity.AboutUsActivity"
+            android:parentActivityName=".activity.UserlistMenuActivity"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".activity.MainActivity"
@@ -36,7 +33,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.UserlistActivity"
+            android:name=".activity.UserlistMenuActivity"
             android:parentActivityName=".activity.MainActivity"
             android:theme="@style/AppTheme" />
 
@@ -50,5 +47,12 @@
                 android:resource="@xml/provider_paths" />
         </provider>
     </application>
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 </manifest>
