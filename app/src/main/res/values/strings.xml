@@ -16,4 +16,9 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="fullscreen_apprentice_photo_description">Apprentice Photo in full screen</string>
+    <string name="name_david">David Pavlic</string>
+    <string name="name_suhejl">Suhejl Asani</string>
+    <string name="description_creator_david">Picture of the creator of the app: David Pavlic</string>
+    <string name="description_creator_suhejl">Picture of the creator of the app: Suhejl Asani</string>
+
 </resources>
