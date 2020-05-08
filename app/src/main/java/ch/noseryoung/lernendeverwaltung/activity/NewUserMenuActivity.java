@@ -76,7 +76,7 @@ public class NewUserMenuActivity extends BaseMenuActivity {
         photoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectImage();
+                openCamera();
             }
         });
 
@@ -86,7 +86,7 @@ public class NewUserMenuActivity extends BaseMenuActivity {
             @Override
             public void onClick(View v) {
                 if (currentPhotoUri == null) {
-                    selectImage();
+                    openCamera();
                 } else {
                     openFullscreenApprenticePhoto();
                 }
@@ -104,103 +104,10 @@ public class NewUserMenuActivity extends BaseMenuActivity {
         if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_IMAGE_CAPTURE) {
                 photo.setImageURI(currentPhotoUri);
-            } else if (requestCode == 2) {
-                Uri selectedImageUri = data.getData();
-                String apprenticePhotoPath = selectedImageUri.getPath();
-                String[] filePath = {MediaStore.Images.Media.DATA};
-            /*    try {*/
-                    File apprenticePhoto = new File(selectedImageUri.getPath());
-                    File[] d = getExternalFilesDir(Environment.DIRECTORY_PICTURES).listFiles();
-
-                String[] projection = { MediaStore.MediaColumns.DATA,
-                        MediaStore.Images.Media.BUCKET_DISPLAY_NAME };
-
-                ArrayList<String> listOfAllImages = getImages();
-               Cursor cursor = getContentResolver().query( MediaStore.Images.Media.EXTERNAL_CONTENT_URI, projection, null,
-                        null, null);
-                    String name = "";
-                int column_index_data = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
-               int  column_index_folder_name = cursor
-                        .getColumnIndexOrThrow(MediaStore.Images.Media.BUCKET_DISPLAY_NAME);
-                while (cursor.moveToNext()) {
-                    String PathOfImage = cursor.getString(column_index_data);
-
-                    listOfAllImages.add(PathOfImage);
-                }
-
-                    currentPhotoName = new File(listOfAllImages.get(0)).getName();
-
-                    photo.setImageURI(selectedImageUri);
-              /*  } catch (Exception ioEx) {
-                    Log.e(TAG, ioEx.getMessage());
-                }*/
-
-
-
-             /*   Cursor c = getContentResolver().query(selectedImageUri, filePath, null, null, null);
-                c.moveToFirst();
-                int columnIndex = c.getColumnIndex(filePath[0]);
-                String picturePath = c.getString(columnIndex);
-                c.close();
-                Bitmap thumbnail = BitmapFactory.decodeFile(picturePath);
-                Log.w(TAG, picturePath);
-                photo.setImageBitmap(thumbnail);*/
-
             }
+        } else {
+            currentPhotoUri = null;
         }
-    }
-
-    public ArrayList<String> getImages()
-    {
-        ArrayList<String> paths = new ArrayList<String>();
-        final String[] columns = { MediaStore.Images.Media.DISPLAY_NAME};
-        String selection = MediaStore.Images.Media.BUCKET_DISPLAY_NAME + " = ?";
-        String[] selectionArgs = new String[] {
-                "Camera"
-        };
-        final String orderBy = MediaStore.Images.Media.DATE_ADDED;
-        //Stores all the images from the gallery in Cursor
-
-        Cursor cursor = getApplicationContext().getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, null, null, null, null);
-        //Total number of images
-        int count = cursor.getCount();
-
-        //Create an array to store path to all the images
-        String[] arrPath = new String[count];
-
-        for (int i = 0; i < count; i++) {
-            cursor.moveToPosition(i);
-            int dataColumnIndex = cursor.getColumnIndex(MediaStore.Images.Media.DATA);
-            //Store the path of the image
-            arrPath[i]= cursor.getString(dataColumnIndex);
-            paths.add(arrPath[i]);
-
-        }
-        cursor.close();
-        return  paths;
-    }
-
-    private void selectImage() {
-        final String takePhotoOption = "Foto aufnehmen";
-        final String chooseGalleryOption = "Foto aus Galerie auswählen";
-        final String cancelOption = "Abbrechen";
-
-        final String[] options = {takePhotoOption, chooseGalleryOption, cancelOption};
-        AlertDialog.Builder builder = new AlertDialog.Builder(NewUserMenuActivity.this);
-        builder.setTitle("Foto hinzufügen");
-        builder.setItems(options, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if (takePhotoOption.equals(options[which])) {
-                    openCamera();
-                } else if (chooseGalleryOption.equals(options[which])) {
-                    openGallery();
-                } else if (cancelOption.equals(options[which])) {
-                    dialog.dismiss();
-                }
-            }
-        });
-        builder.show();
     }
 
     private void openCamera() {
@@ -225,12 +132,6 @@ public class NewUserMenuActivity extends BaseMenuActivity {
                 startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
             }
         }
-    }
-
-    private void openGallery() {
-        Intent pickApprenticePhoto = new Intent(Intent.ACTION_PICK,
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(pickApprenticePhoto, PICK_IMAGE);
     }
 
     private File createImageFile() throws IOException {
