@@ -27,10 +27,10 @@
         android:text="@string/lastname"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toEndOf="@+id/userlist_firstnameTextView"
         app:layout_constraintTop_toBottomOf="@+id/userlist_createApprenticeButton"
-        app:layout_constraintVertical_bias="0.109" />
+        app:layout_constraintVertical_bias="0.156" />
 
     <TextView
         android:id="@+id/userlist_firstnameTextView"
@@ -39,10 +39,10 @@
         android:text="@string/prename"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.23"
+        app:layout_constraintHorizontal_bias="0.237"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userlist_createApprenticeButton"
-        app:layout_constraintVertical_bias="0.109" />
+        app:layout_constraintVertical_bias="0.156" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/userlist_apprenticesList"
@@ -71,6 +71,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userlist_createApprenticeButton"
-        app:layout_constraintVertical_bias="0.156" />
+        app:layout_constraintVertical_bias="0.21" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
